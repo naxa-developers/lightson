@@ -42,10 +42,11 @@ header {
 
     text-align: center;
     font-weight: 700;
-    color: #000;
+    color:#fff;
     height: 40px;
     margin-left: 30px;
 }
+
 
 .switch-input {
     display: none;
@@ -1126,4 +1127,7 @@ li{
     margin-right: 15px;
     outline: none;
     box-shadow: none;
+}
+.about-section{
+    display: none;
 }

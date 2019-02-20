@@ -129,7 +129,7 @@
             </div>
             <div class="btnflex">
               <button class="export-btn"> Data</button>
-              <button class="nextprev mt30">
+              <button class="nextprev mt30 aboutbtn">
                   <span> About US</span>
               </button>
             </div>
@@ -488,7 +488,7 @@
     </div>
 
 
-    <section class="detail sectionPadding rlpadding">
+    <section class="detail sectionPadding rlpadding about-section">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
@@ -948,6 +948,9 @@
             $('.progress-report').show('slow');
           });
         });
+        $('button.aboutbtn').on("click", function () {
+            $('.about-section').toggle('slow');
+          });
 
 
         
