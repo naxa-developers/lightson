@@ -24,7 +24,8 @@
 
 <body>
     <header>
-        <div class="container-fluid d-flex align-items-center">
+        <div class="container-fluid d-flex align-items-center  custom-flex">
+          
             <div class="logoHolder">
 
                 <span class="LogoText">
@@ -48,9 +49,8 @@
                 <label for="id-name--1" class="switch-label"><span class="toggle--on">Darkmode</span><span class="toggle--off">Lightmode</span></label>
             </div>
 
-
-
         </div>
+
 
 
     </header>
@@ -65,20 +65,76 @@
             </div>
 
             <div id="chart1" style="height:200px"></div>
-
-
-
-
-            <div id="chart2" style="height:200px">
-
+            <div id="chart2" style="height:200px"></div>
+            <div class="charts"></div>
+            <div class="progress-report">
+              <div class="progressOne">
+                <div class="progressWrapper">
+                  <h4>Solar Light<span class="total-count">5000</span></h4>
+                    <div class="progress-content">
+                        <h5>function</h5>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top">85%</span>
+                        </div>
+                        <div class="datashow">
+                            <label>Solar light : </label><span class="progress-value">85%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progressWrapper">
+                    <div class="progress-content">
+                        <h5>Non-functional</h5>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
+                        </div>
+                        <div class="datashow">
+                            <label>Non-functional : </label><span class="progress-value">0</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="progressTwo">
+                <div class="progressWrapper">
+                  <h4>Electric Light<span class="total-count">5000</span></h4>
+                    <div class="progress-content">
+                        <h5>function</h5>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
+                        </div>
+                        <div class="datashow">
+                            <label>Function : </label><span class="progress-value">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progressWrapper">
+                    <div class="progress-content">
+                        <h5>Non-functional</h5>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
+                        </div>
+                        <div class="datashow">
+                            <label>Non-functional : </label><span class="progress-value">0</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
             </div>
-            <div class="charts">
-
+            <div class="btnflex">
+              <button class="export-btn"> Data</button>
+              <button class="nextprev mt30">
+                  <span> About US</span>
+              </button>
             </div>
-            <button class="nextprev mt30">
-                <span> About US</span>
-            </button>
-              <h1 data-step="3" data-intro="Click to find out more about Project!"></h1>
+
+                <h1 data-step="3" data-intro="Click to find out more about Project!"></h1>
         </div>
         <div class="fixedfooter">
             <h1 data-step="1" data-intro="Click and add Markers to map!"></h1>
@@ -91,44 +147,69 @@
 
             </button>
         </div>
+
+        <!--Lagend start -->
         <div class="legends">
-            <div class="lTitle">
-                Click and Filter
-            </div>
-            <div class="legendItems">
-                <span class="solar">
 
-                </span>
-                <span class="activefilter">
-                    Solar Lights
-                </span>
-            </div>
+          <!-- filter section Upadated-->
+            <div class="filter">
+                <form>
+                    <ul>
+                        <li>
+                          <!-- sub filter -->
+                          <div class="toggle-subfilter">
+                            <h5>Solar Light </h5>
+                            <!-- filter -->
+                            <div class="toggle-filter">
+                              <p>functional</p>
+                              <div class="switch">
+                                  <input type="checkbox" id="function-btn">
+                                  <label for ="function-btn"></label>
+                              </div>
+                            </div>
 
-            <div class="legendItems">
-                <span class="electric">
+                            <!-- filter -->
+                            <div class="toggle-filter">
+                              <p>Non-functional</p>
+                              <div class="switch">
+                                  <input type="checkbox" id="nonfunction-btn">
+                                  <label for ="nonfunction-btn"></label>
+                              </div>
+                            </div>
 
-                </span>
-                <span>
-                    Renewable
-                </span>
-            </div>
-            <div class="legendItems">
-                <span class="renewable">
+                          </div>
+                        </li>
+                        <li>
+                          <!-- sub filter -->
+                          <div class="toggle-subfilter">
+                            <h5>Electric Light</h5>
+                            <!--filter -->
+                            <div class="toggle-filter">
+                              <p>functional</p>
+                              <div class="switch">
+                                  <input type="checkbox" id="electric-btn">
+                                  <label for ="electric-btn"></label>
+                              </div>
+                            </div>
 
-                </span>
-                <span>
-                    Electric Lights
-                </span>
-            </div>
-            <div class="legendItems">
-                <span class="nonrenewable">
-
-                </span>
-                <span>
-                    Non Renewable
-                </span>
+                            <!--filter -->
+                            <div class="toggle-filter">
+                              <p>Non-functional</p>
+                              <div class="switch">
+                                  <input type="checkbox" id="nonelectric-btn">
+                                  <label for ="nonelectric-btn"></label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                    </ul>
+            
+                </form>
             </div>
         </div>
+
+        <!--lagend end -->
+
         <h1 data-step="2" data-intro="Click and find in the map  different types of lights being used"></h1>
     </div>
 
@@ -598,6 +679,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="<?php echo base_url()?>/assets/frontend/js/intro.min.js"></script>
+    <script src="<?php echo base_url()?>/assets/frontend/js/jquery.nicescroll.min.js"></script>
     <script>
         // Build the chart
  var solar='<?php echo $pie_data_s ?>';
@@ -616,7 +698,7 @@
 
             },
             title: {
-                text: 'Use of Energy'
+                text: ''
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -711,7 +793,7 @@
                 plotShadow: false
             },
             title: {
-                text: 'Type of Poles',
+                text: '',
                 align: 'center',
 
                 y: 40
@@ -843,7 +925,32 @@
                     });
                 }
             });
+
+            $(".progress-bar").each(function () {
+              each_bar_width = $(this).attr('aria-valuenow');
+              $(this).width(each_bar_width + '%');
+          });
+
+            
+              $(".sideData").niceScroll({
+                  cursorcolor: "#a7a7a7",
+                  cursorborder: "0px solid #fff",
+                  cursorborderradius: "0px",
+                  cursorwidth: "4px"
+              });
+
+          $('.export-btn a').on("click", function (e) {
+            e.preventDefault();
+              $('.export-btn ul').slideToggle(300);
+            });
+          
+        $('.toggle-filter .switch').on("change", function () {
+            $('.progress-report').show('slow');
+          });
         });
+
+
+        
     </script>
 
 </body>
