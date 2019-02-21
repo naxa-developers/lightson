@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +31,7 @@
 <body>
     <header>
         <div class="container-fluid d-flex align-items-center  custom-flex">
-
+          
             <div class="logoHolder">
 
                 <span class="LogoText">
@@ -40,7 +39,7 @@
                 </span>
             </div>
             <?php
-              $error= $this->session->flashdata('msg');
+              $error=	$this->session->flashdata('msg');
                if($error){ ?>
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  <div class="alert alert-info alert-dismissible">
@@ -180,7 +179,7 @@
                             <div class="toggle-filter">
                               <p>functional</p>
                               <div class="switch">
-                                  <input type="checkbox" value = "solar_functional" class="CheckBox" id="function-btn">
+                                  <input type="checkbox" id="function-btn">
                                   <label for ="function-btn"></label>
                               </div>
                             </div>
@@ -189,7 +188,7 @@
                             <div class="toggle-filter">
                               <p>Non-functional</p>
                               <div class="switch">
-                                  <input type="checkbox" value="solar_nonfunctional" class="CheckBox" id="nonfunction-btn">
+                                  <input type="checkbox" id="nonfunction-btn">
                                   <label for ="nonfunction-btn"></label>
                               </div>
                             </div>
@@ -204,7 +203,7 @@
                             <div class="toggle-filter">
                               <p>functional</p>
                               <div class="switch">
-                                  <input type="checkbox" value = "electric_functional" class="CheckBox" id="electric-btn">
+                                  <input type="checkbox" id="electric-btn">
                                   <label for ="electric-btn"></label>
                               </div>
                             </div>
@@ -213,14 +212,14 @@
                             <div class="toggle-filter">
                               <p>Non-functional</p>
                               <div class="switch">
-                                  <input type="checkbox" value="electric_nonfunctional" class="CheckBox" id="nonelectric-btn">
+                                  <input type="checkbox" id="nonelectric-btn">
                                   <label for ="nonelectric-btn"></label>
                               </div>
                             </div>
                           </div>
                         </li>
                     </ul>
-
+            
                 </form>
             </div>
         </div>
@@ -585,12 +584,6 @@
         });
 
         console.log(geojson_layer);
-        var solar_functional=L.featureGroup();
-        var electric_functional=L.featureGroup();
-        var solar_nonfunctional=L.featureGroup();
-        var electric_nonfunctional=L.featureGroup();
-        var electric = L.featureGroup();
-        var solar=L.featureGroup();
         var light_map = new L.GeoJSON(geojson_layer, {
 
           pointToLayer: function(feature, latlng) {
@@ -635,36 +628,15 @@
           },
 
           onEachFeature: function(feature, layer) {
-          console.log(feature.properties);
+          console.log(feature.properties.who_is_your_area_coordinator);
 
             layer.bindPopup(""+feature.properties.id);
             //feature.properties.layer_name = "transit_stops";
-            //add if condition
-            if(feature.properties.type_of_street_light == "solar"){
-              layer.addTo(solar);
-              if(feature.properties.what_is_the_status_of_street_light == "Functional"){
-                layer.addTo(solar_functional);
-              }
-              else{
-                layer.addTo(solar_nonfunctional);
-              }
-            }
-            else{
-              layer.addTo(electric);
-              if(feature.properties.what_is_the_status_of_street_light == "Functional"){
-                layer.addTo(electric_functional);
-              }
-              else{
-                layer.addTo(electric_nonfunctional);
-              }
-
-            }
-            //else
 
           }
-        });//.addTo(mymap);
+        }).addTo(mymap);
 
-        //solar_functional.addTo(mymap);
+
 
         $('.switch-input').on('change',function(){
           console.log('clicked');
@@ -676,20 +648,6 @@
             mymap.addLayer(CartoDB_DarkMatter);
           }
 
-
-        });
-
-        $(".CheckBox").on("click",function(e){
-          var value = $(this).val();
-          console.log(value);
-          var layerclicked = eval(value);//window[e.target.value];
-          console.log(layerclicked);
-          if(mymap.hasLayer(layerclicked)){
-            mymap.removeLayer(layerclicked);
-          }
-          else{
-            mymap.addLayer(layerclicked);
-          }
 
         });
         });
@@ -727,6 +685,7 @@
 
 
     })
+
 
 
 
@@ -895,7 +854,6 @@
             $(".ipbtn").click(function () {
               $("body").css("overflow", "auto");
                 $(".olay").addClass("hide");
-                $(".sideData").css("overflow-y","scroll");
             })
         });
     </script>
@@ -992,16 +950,19 @@
               $(this).width(each_bar_width + '%');
           });
 
-
             
-              
-
+              // $(".sideData").niceScroll({
+              //     cursorcolor: "#a7a7a7",
+              //     cursorborder: "0px solid #fff",
+              //     cursorborderradius: "0px",
+              //     cursorwidth: "4px"
+              // });
 
           $('.export-btn a').on("click", function (e) {
             e.preventDefault();
               $('.export-btn ul').slideToggle(300);
             });
-
+          
         $('.toggle-filter .switch').on("change", function () {
             $('.progress-report').show('slow');
           });
@@ -1011,7 +972,7 @@
           });
 
 
-
+        
     </script>
 
 </body>

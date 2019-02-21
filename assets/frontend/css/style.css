@@ -925,6 +925,22 @@ li{
 .filter ul li p{
     margin-bottom: 0;
     font-size:0.875rem;
+    position: relative;
+    padding-left: 16px;
+}
+.filter ul li p::before{
+    position: absolute;
+    content:'';
+    width:12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    left:0;
+    top:0;
+    background-color: var(--yellow);
+        -webkit-animation: pulse 1.5s infinite;
+    -moz-animation: pulse 1.5s infinite;
+    animation: pulse 1.5s infinite;
 }
 .filter ul li .toggle-subfilter h5{
     color:var(--yellow);
@@ -1141,4 +1157,35 @@ li{
 }
 .about-section{
     display: none;
+}
+
+pulse {
+    -webkit-animation: pulse 1.5s infinite;
+    -moz-animation: pulse 1.5s infinite;
+    animation: pulse 1.5s infinite;
+    @-webkit-keyframes pulse {
+        0% {
+            -webkit-box-shadow: 0 0 0 0 rgba(255, 7, 7, 0.5);
+        }
+        70% {
+            -webkit-box-shadow: 0 0 0 0 rgba(255, 7, 7, 0.5);
+        }
+        100% {
+            -webkit-box-shadow: 0 0 0 0 rgba(255, 7, 7, 0.5);
+        }
+    }
+    @keyframes pulse {
+        0% {
+            -moz-box-shadow: 0 0 0 0 rgba(255, 7, 7, 0.5);
+            box-shadow: 0 0 0 0 rgba(255, 7, 7, 0.5);
+        }
+        70% {
+            -moz-box-shadow: 0 0 0 10px rgba(255, 7, 7, 0.5);
+            box-shadow: 0 0 0 10px rgba(255, 7, 7, 0.5);
+        }
+        100% {
+            -moz-box-shadow: 0 0 0 0 rgba(255, 7, 7, 0.5);
+            box-shadow: 0 0 0 0 rgba(255, 7, 7, 0.5);
+        }
+    }
 }
