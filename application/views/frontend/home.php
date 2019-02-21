@@ -69,7 +69,7 @@
             </div>
 
             <div id="chart1" style="height:200px"></div>
-            <div id="chart2" style="height:200px"></div>
+            <!-- <div id="chart2" style="height:200px"></div> -->
             <div class="charts"></div>
 
             <!-- progress report -->
@@ -78,13 +78,13 @@
               <!-- progress reportOne -->
               <div class="progressOne">
                 <div class="progressWrapper">
-                  <h4>Solar Light<span class="total-count">5000</span></h4>
+                  <h4>Solar Light<span class="total-count"><?php echo $pie_data_s ?></span></h4>
                     <div class="progress-content">
                         <h5>function</h5>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="50">
-                            <span class="popOver" data-toggle="tooltip" data-placement="top">50%</span>
+                        <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" id="p_s_func" aria-valuemax="<?php echo $pie_data_s ?>">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top"></span>
                         </div>
                         <div class="datashow">
                             <label>Solar light : </label><span class="progress-value">50%</span>
@@ -96,7 +96,7 @@
                         <h5>Non-functional</h5>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" id="p_s_nfunc" aria-valuemax="<?php echo $pie_data_s ?>">
                             <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
                         </div>
                         <div class="datashow">
@@ -109,12 +109,12 @@
               <!-- progress reportTwo -->
               <div class="progressTwo">
                 <div class="progressWrapper">
-                  <h4>Electric Light<span class="total-count">5000</span></h4>
+                  <h4>Electric Light<span class="total-count"><?php echo $pie_data_e ?></span></h4>
                     <div class="progress-content">
                         <h5>function</h5>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_func" aria-valuemax="<?php echo $pie_data_e ?>">
                             <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
                         </div>
                         <div class="datashow">
@@ -127,7 +127,7 @@
                         <h5>Non-functional</h5>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_nfunc" aria-valuemax="<?php echo $pie_data_e ?>">
                             <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
                         </div>
                         <div class="datashow">
@@ -601,9 +601,9 @@
         var electric = L.featureGroup();
         var solar=L.featureGroup();
         var s_func_count=0;
-        var s_non_func_count=1;
+        var s_non_func_count=0;
         var e_func_count=0;
-        var e_non_func_count=1;
+        var e_non_func_count=0;
 
         var light_map = new L.GeoJSON(geojson_layer, {
 
@@ -652,6 +652,7 @@
                 layer.addTo(solar_functional);
               }
               else{
+                s_non_func_count++;
                 layer.addTo(solar_nonfunctional);
               }
             }
@@ -662,6 +663,7 @@
                 layer.addTo(electric_functional);
               }
               else{
+                e_non_func_count++;
                 layer.addTo(electric_nonfunctional);
               }
 
@@ -670,8 +672,8 @@
 
           }
         });//.addTo(mymap);
-        console.log(s_func_count);
-        console.log(e_func_count);
+
+
         solar_functional.addTo(mymap);
         solar_nonfunctional.addTo(mymap);
         electric_functional.addTo(mymap);
@@ -690,17 +692,82 @@
 
         });
 
+        // console.log(s_func_count);
+        // console.log(s_non_func_count);
+        // console.log(e_func_count);
+        // console.log(e_non_func_count);
+
+        //adding value to pregress bar
+      //  var s_func_count;
+        function createProgressBar(s_func_count_p,s_non_func_count_p,e_func_count_p,e_non_func_count_p){
+          //console.log(s_func_count_p);
+          $('#p_s_func').attr('aria-valuenow',s_func_count_p);
+          $('#p_s_nfunc').attr('aria-valuenow',s_non_func_count_p);
+          $('#p_e_func').attr('aria-valuenow',e_func_count_p);
+          $('#p_e_nfunc').attr('aria-valuenow',e_non_func_count_p);
+
+          $(".progress-bar").each(function () {
+            var now=$(this).attr('aria-valuenow')
+            var max=$(this).attr('aria-valuemax')
+            var $percent = (now / max) * 100;
+            each_bar_width = $(this).attr('aria-valuenow');
+            $(this).width(Math.round($percent) + '%');
+            $(this).find('.popOver').html(Math.round($percent) + '%');
+            $(this).parent().find('.progress-value').html(" " + now);
+        });
+        }
+        createProgressBar(s_func_count,s_non_func_count,e_func_count,e_non_func_count);
+        //end
+
+
         $(".CheckBox").on("click",function(e){
           var value = $(this).val();
           var check =$(this). prop("checked");
-        //  console.log(check);
           //console.log(value);
+          //filter progressbar
+          if($('#function-btn').prop("checked")==false){
+            c_s_func_count=0;
+
+          }else{
+            c_s_func_count=s_func_count;
+          }
+
+          if($('#nonfunction-btn').prop("checked")==false){
+          c_s_non_func_count=0;
+
+          }else{
+            c_s_non_func_count=s_non_func_count;
+
+          }
+
+          if($('#electric-btn').prop("checked")==false){
+            c_e_func_count=0;
+
+          }else{
+            c_e_func_count=e_func_count;
+
+          }
+
+          if($('#nonelectric-btn').prop("checked")==false){
+            c_e_non_func_count=0;
+
+          }else{
+            c_e_non_func_count=e_non_func_count;
+
+          }
+          createProgressBar(c_s_func_count,c_s_non_func_count,c_e_func_count,c_e_non_func_count);
+
+
+
+
+
           var layerclicked = eval(value);//window[e.target.value];
-        //  console.log(layerclicked);
+
           if(mymap.hasLayer(layerclicked)){
-            // if(check == false){
+
             mymap.removeLayer(layerclicked);
-          //}
+
+
           }
           else{
             mymap.addLayer(layerclicked);
@@ -721,7 +788,7 @@
         var marker = L.marker([27.710623, 85.327163], {
             draggable: true
         }).addTo(mymap1);
-        marker.bindPopup('<b><p class="center">Drag The Marker On Your Office</p></b>').openPopup();
+        marker.bindPopup('<b><p class="center">Drag The Marker To Choose Light</p></b>').openPopup();
         marker.on('dragend', function(e) {
 
 
@@ -746,6 +813,8 @@
 
     mymap1.attributionControl.addAttribution(
         'this is a product of <b> NAXA </b> ');
+
+
   });
     </script>
 
@@ -801,9 +870,7 @@
         });
 
 
-        Highcharts.setOptions({
 
-        });
     </script>
     <script>
     var bar_data='<?php echo $bar_data ?>';
@@ -957,10 +1024,16 @@
                 }
             });
 
-            $(".progress-bar").each(function () {
-              each_bar_width = $(this).attr('aria-valuenow');
-              $(this).width(each_bar_width + '%');
-          });
+          //   $(".progress-bar").each(function () {
+          //     var now=$(this).attr('aria-valuenow')
+          //     var max=$(this).attr('aria-valuemax')
+          //     var $percent = (now / max) * 100;
+          //     each_bar_width = $(this).attr('aria-valuenow');
+          //     $(this).width($percent + '%');
+          //     $(this).find('.popOver').html($percent + '%');
+          //     $(this).parent().find('.progress-value').html(" " + now);
+          // });
+
 
 
 
@@ -975,10 +1048,12 @@
         $('.toggle-filter .switch').on("change", function () {
             $('.progress-report').show('slow');
           });
+
+          $('button.aboutbtn').on("click", function () {
+              $('.about-section').toggle('slow');
+            });
         });
-        $('button.aboutbtn').on("click", function () {
-            $('.about-section').toggle('slow');
-          });
+
 
 
 
