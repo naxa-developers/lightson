@@ -56,6 +56,13 @@ public function do_upload($filename,$name)
   }
 }
 
+public function update($id,$data){ // update the edited table
+
+  $this->db->where('id',$id);
+  $q=$this->db->update('light',$data);
+
+}
+
 public function bar_graph(){
 $this->db->select('type_of_street_light_poles as name,count(id) as total ');
 $this->db->group_by('type_of_street_light_poles');

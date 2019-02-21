@@ -34,6 +34,7 @@ $light=$this->Main_model->get_data();
 
 if(isset($_POST['submit'])){
 
+
 unset($_POST['submit']);
 
 if(array_key_exists("other",$_POST)){
@@ -48,6 +49,9 @@ unset($_POST['type_of_street_light_poles_other']);
 
 
 $insert=$this->Main_model->insert($_POST);
+// var_dump($_POST);
+// var_dump($insert);
+// exit();
 if($insert!=''){
 
 	$file_name = $_FILES['photo']['name'];
@@ -66,6 +70,8 @@ if($insert!=''){
 			'photo_thumb'=>base_url() . 'uploads/'.$insert.'_thumb.'.$ext
 
 		);
+
+		$this->Main_model->update($insert,$data);
 
 		$config['image_library'] = 'gd2';
 		$config['source_image'] = './uploads/'.$insert.'.'.$ext;
@@ -95,6 +101,7 @@ $this->session->set_flashdata('msg','Form Submitted Succssfully');
 
 
 }
+redirect(base_url());
 }
 
 		foreach($light as $data){

@@ -15,16 +15,16 @@
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
       crossorigin="" />
 
-      
+
 
     <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/style.css">
-      
-
-    
-    
 
 
-    
+
+
+
+
+
 
 
 </head>
@@ -40,9 +40,10 @@
                 </span>
             </div>
             <?php
+
               $error= $this->session->flashdata('msg');
                if($error){ ?>
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                  <div class="alert alert-info alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Message!!!!</strong> <?php echo $error ; ?>
@@ -82,11 +83,11 @@
                         <h5>function</h5>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                            <span class="popOver" data-toggle="tooltip" data-placement="top">85%</span>
+                        <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top">50%</span>
                         </div>
                         <div class="datashow">
-                            <label>Solar light : </label><span class="progress-value">85%</span>
+                            <label>Solar light : </label><span class="progress-value">50%</span>
                         </div>
                     </div>
                 </div>
@@ -136,7 +137,7 @@
                 </div>
               </div>
             </div>
-          
+
           <!-- progress report end -->
 
             <div class="btnflex">
@@ -150,9 +151,9 @@
         </div>
         <section class="main" id="mapid">
 
-        
+
         </section>
-        
+
         <div class="fixedfooter">
             <h1 data-step="1" data-intro="Click and add Markers to map!"></h1>
             <button class="maptopBtn" type="button" data-toggle="modal" data-target="#modal1">
@@ -180,7 +181,7 @@
                             <div class="toggle-filter">
                               <p>functional</p>
                               <div class="switch">
-                                  <input type="checkbox" value = "solar_functional" class="CheckBox" id="function-btn">
+                                  <input type="checkbox" value = "solar_functional" class="CheckBox" id="function-btn" checked>
                                   <label for ="function-btn"></label>
                               </div>
                             </div>
@@ -189,7 +190,7 @@
                             <div class="toggle-filter">
                               <p>Non-functional</p>
                               <div class="switch">
-                                  <input type="checkbox" value="solar_nonfunctional" class="CheckBox" id="nonfunction-btn">
+                                  <input type="checkbox" value="solar_nonfunctional" class="CheckBox" id="nonfunction-btn" checked>
                                   <label for ="nonfunction-btn"></label>
                               </div>
                             </div>
@@ -204,7 +205,7 @@
                             <div class="toggle-filter">
                               <p>functional</p>
                               <div class="switch">
-                                  <input type="checkbox" value = "electric_functional" class="CheckBox" id="electric-btn">
+                                  <input type="checkbox" value = "electric_functional" class="CheckBox" id="electric-btn" checked>
                                   <label for ="electric-btn"></label>
                               </div>
                             </div>
@@ -213,7 +214,7 @@
                             <div class="toggle-filter">
                               <p>Non-functional</p>
                               <div class="switch">
-                                  <input type="checkbox" value="electric_nonfunctional" class="CheckBox" id="nonelectric-btn">
+                                  <input type="checkbox" value="electric_nonfunctional" class="CheckBox" id="nonelectric-btn" checked>
                                   <label for ="nonelectric-btn"></label>
                               </div>
                             </div>
@@ -554,11 +555,19 @@
 
       <script src="<?php echo base_url()?>assets/frontend/js/jquery.bootstrap.wizard.js"> </script>
     <!-- <script src="<?php echo base_url()?>assets/frontend/js/jquery.steps.min.js"> </script> -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="<?php echo base_url()?>/assets/frontend/js/intro.min.js"></script>
+    <script src="<?php echo base_url()?>/assets/frontend/js/jquery.nicescroll.min.js"></script>
+
+
     <script>
+
     $(document).ready(function(){
         var geojson='<?php echo $light_data ?>';
         geojson_layer = JSON.parse(geojson);
-        console.log(geojson_layer);
+        //console.log(geojson_layer);
 
         var mymap = L.map('mapid').setView([27.7172, 85.3240], 13);
         var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -584,7 +593,7 @@
             attribution: '&copy; Openstreetmap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         });
 
-        console.log(geojson_layer);
+        //console.log(geojson_layer);
         var solar_functional=L.featureGroup();
         var electric_functional=L.featureGroup();
         var solar_nonfunctional=L.featureGroup();
@@ -594,39 +603,30 @@
         var light_map = new L.GeoJSON(geojson_layer, {
 
           pointToLayer: function(feature, latlng) {
-           //  if(feature.properties.incident_type=='Fire'){
-           //
-           // icon_url='https://unpkg.com/leaflet@1.0.3/dist/images/marker-icon.png';
-           //
-           //  }else if(feature.properties.incident_type=='Landslide'){
-           //
-           //    icon_url='https://unpkg.com/leaflet@1.0.3/dist/images/marker-icon.png';
-           //
-           //  }else if(feature.properties.incident_type=='Fire'){
-           //
-           //    icon_url='https://unpkg.com/leaflet@1.0.3/dist/images/marker-icon.png';
-           //
-           //  }else if(feature.properties.incident_type=='Lightning'){
-           //
-           //    icon_url='https://unpkg.com/leaflet@1.0.3/dist/images/marker-icon.png';
-           //
-           //  }else if(feature.properties.incident_type=='Waste'){
-           //
-           //    icon_url='https://unpkg.com/leaflet@1.0.3/dist/images/marker-icon.png';
-           //
-           //  }else if(feature.properties.incident_type=='Road'){
-           //
-           //    icon_url='https://unpkg.com/leaflet@1.0.3/dist/images/marker-icon.png';
-           //
-           //  }else if(feature.properties.incident_type=='Others'){
-           //
-           //    icon_url='https://unpkg.com/leaflet@1.0.3/dist/images/marker-icon.png';
-           //  }
+            if(feature.properties.type_of_street_light == "solar"){
+
+              if(feature.properties.what_is_the_status_of_street_light == "functional"){
+              var  icon='<?php echo base_url()?>/icon/sa.png';
+              }
+
+              else{
+              var  icon='<?php echo base_url()?>/icon/si.png';
+              }
+            }else{
+              if(feature.properties.what_is_the_status_of_street_light == "functional"){
+              var  icon='<?php echo base_url()?>/icon/ea.png';
+              }
+
+              else{
+              var  icon='<?php echo base_url()?>/icon/ei.png';
+              }
+
+            }
             icons = L.icon({
-              //iconSize: [27, 27],
+              iconSize: [40, 45],
               iconAnchor: [13, 27],
               popupAnchor:  [2, -24],
-              iconUrl: 'https://unpkg.com/leaflet@1.0.3/dist/images/marker-icon.png'
+              iconUrl: icon
             });
             //console.log(icon.options);
             var marker = L.marker(latlng, {icon: icons});
@@ -635,14 +635,14 @@
           },
 
           onEachFeature: function(feature, layer) {
-          console.log(feature.properties);
+        //  console.log(feature.properties);
 
             layer.bindPopup(""+feature.properties.id);
             //feature.properties.layer_name = "transit_stops";
             //add if condition
             if(feature.properties.type_of_street_light == "solar"){
               layer.addTo(solar);
-              if(feature.properties.what_is_the_status_of_street_light == "Functional"){
+              if(feature.properties.what_is_the_status_of_street_light == "functional"){
                 layer.addTo(solar_functional);
               }
               else{
@@ -651,7 +651,7 @@
             }
             else{
               layer.addTo(electric);
-              if(feature.properties.what_is_the_status_of_street_light == "Functional"){
+              if(feature.properties.what_is_the_status_of_street_light == "functional"){
                 layer.addTo(electric_functional);
               }
               else{
@@ -664,10 +664,13 @@
           }
         });//.addTo(mymap);
 
-        //solar_functional.addTo(mymap);
+        solar_functional.addTo(mymap);
+        solar_nonfunctional.addTo(mymap);
+        electric_functional.addTo(mymap);
+        electric_nonfunctional.addTo(mymap);
 
         $('.switch-input').on('change',function(){
-          console.log('clicked');
+        //  console.log('clicked');
           if(mymap.hasLayer(CartoDB_DarkMatter)){
             mymap.removeLayer(CartoDB_DarkMatter);
             mymap.addLayer(OpenStreetMap_France);
@@ -681,21 +684,24 @@
 
         $(".CheckBox").on("click",function(e){
           var value = $(this).val();
-          console.log(value);
+          var check =$(this). prop("checked");
+        //  console.log(check);
+          //console.log(value);
           var layerclicked = eval(value);//window[e.target.value];
-          console.log(layerclicked);
+        //  console.log(layerclicked);
           if(mymap.hasLayer(layerclicked)){
+            // if(check == false){
             mymap.removeLayer(layerclicked);
+          //}
           }
           else{
             mymap.addLayer(layerclicked);
           }
 
         });
-        });
 
-    </script>
-    <script>
+
+
     var mymap1 = L.map('iframeMap').setView([27.7172, 85.3240], 13);
     var CartoDB_DarkMatter1 = L.tileLayer(
         'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -732,14 +738,10 @@
 
     mymap1.attributionControl.addAttribution(
         'this is a product of <b> NAXA </b> ');
-
+  });
     </script>
 
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="<?php echo base_url()?>/assets/frontend/js/intro.min.js"></script>
-    <script src="<?php echo base_url()?>/assets/frontend/js/jquery.nicescroll.min.js"></script>
+
     <script>
         // Build the chart
  var solar='<?php echo $pie_data_s ?>';
@@ -789,46 +791,6 @@
                 }]
             }]
         });
-        // Highcharts.chart('chart2', {
-        //     chart: {
-        //         plotBackgroundColor: null,
-        //         plotBorderWidth: null,
-        //         plotShadow: false,
-        //         type: 'pie',
-        //
-        //     },
-        //     title: {
-        //         text: 'Use of Energy'
-        //     },
-        //     tooltip: {
-        //         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        //     },
-        //     plotOptions: {
-        //
-        //         pie: {
-        //             allowPointSelect: true,
-        //             cursor: 'pointer',
-        //             dataLabels: {
-        //                 enabled: false
-        //             },
-        //             showInLegend: true
-        //         }
-        //     },
-        //
-        //     series: [{
-        //         name: 'Brands',
-        //         colorByPoint: true,
-        //         data: [{
-        //             name: 'Electrical',
-        //             y: 61.41,
-        //             sliced: true,
-        //             selected: true
-        //         }, {
-        //             name: 'Solar',
-        //             y: 11.84
-        //         }]
-        //     }]
-        // });
 
 
         Highcharts.setOptions({
@@ -993,8 +955,8 @@
           });
 
 
-            
-              
+
+
 
 
           $('.export-btn a').on("click", function (e) {
