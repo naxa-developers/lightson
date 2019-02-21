@@ -83,7 +83,7 @@
                         <h5>function</h5>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="50">
                             <span class="popOver" data-toggle="tooltip" data-placement="top">50%</span>
                         </div>
                         <div class="datashow">
@@ -600,6 +600,11 @@
         var electric_nonfunctional=L.featureGroup();
         var electric = L.featureGroup();
         var solar=L.featureGroup();
+        var s_func_count=0;
+        var s_non_func_count=1;
+        var e_func_count=0;
+        var e_non_func_count=1;
+
         var light_map = new L.GeoJSON(geojson_layer, {
 
           pointToLayer: function(feature, latlng) {
@@ -643,6 +648,7 @@
             if(feature.properties.type_of_street_light == "solar"){
               layer.addTo(solar);
               if(feature.properties.what_is_the_status_of_street_light == "functional"){
+                s_func_count++;
                 layer.addTo(solar_functional);
               }
               else{
@@ -652,6 +658,7 @@
             else{
               layer.addTo(electric);
               if(feature.properties.what_is_the_status_of_street_light == "functional"){
+                e_func_count++;
                 layer.addTo(electric_functional);
               }
               else{
@@ -663,7 +670,8 @@
 
           }
         });//.addTo(mymap);
-
+        console.log(s_func_count);
+        console.log(e_func_count);
         solar_functional.addTo(mymap);
         solar_nonfunctional.addTo(mymap);
         electric_functional.addTo(mymap);
@@ -746,7 +754,7 @@
         // Build the chart
  var solar='<?php echo $pie_data_s ?>';
  var electric='<?php echo $pie_data_e ?>';
- console.log(parseInt(solar));
+ //console.log(parseInt(solar));
 
         Highcharts.setOptions({
             colors: ['#544711', '#A1840F', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
@@ -799,9 +807,9 @@
     </script>
     <script>
     var bar_data='<?php echo $bar_data ?>';
-    console.log(bar_data);
+    //console.log(bar_data);
     var b_data=JSON.parse(bar_data);
-    console.log(b_data);
+    //console.log(b_data);
     b_data.push({
 
         dataLabels: {
