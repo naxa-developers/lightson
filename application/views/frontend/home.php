@@ -7,17 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Light on</title>
     <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/style.css">
-      <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/introjs.min.css">
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-        crossorigin=""></script>
-
-
+    <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/introjs.min.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin="" />
+
+      
+
+    <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/style.css">
+      
+
+    
+    
+
+
+    
 
 
 </head>
@@ -55,11 +61,7 @@
 
     </header>
     <div class="mainholder">
-        <section class="main" id="mapid">
-
-
-        </section>
-        <div class="sideData">
+      <div class="sideData">
             <div class="arowIcon">
                 <i class="fa fa-arrow-right"></i>
             </div>
@@ -67,7 +69,11 @@
             <div id="chart1" style="height:200px"></div>
             <div id="chart2" style="height:200px"></div>
             <div class="charts"></div>
+
+            <!-- progress report -->
             <div class="progress-report">
+
+              <!-- progress reportOne -->
               <div class="progressOne">
                 <div class="progressWrapper">
                   <h4>Solar Light<span class="total-count">5000</span></h4>
@@ -97,6 +103,8 @@
                     </div>
                 </div>
               </div>
+
+              <!-- progress reportTwo -->
               <div class="progressTwo">
                 <div class="progressWrapper">
                   <h4>Electric Light<span class="total-count">5000</span></h4>
@@ -127,6 +135,9 @@
                 </div>
               </div>
             </div>
+          
+          <!-- progress report end -->
+
             <div class="btnflex">
               <button class="export-btn"> Data</button>
               <button class="nextprev mt30 aboutbtn">
@@ -136,6 +147,11 @@
 
                 <h1 data-step="3" data-intro="Click to find out more about Project!"></h1>
         </div>
+        <section class="main" id="mapid">
+
+        
+        </section>
+        
         <div class="fixedfooter">
             <h1 data-step="1" data-intro="Click and add Markers to map!"></h1>
             <button class="maptopBtn" type="button" data-toggle="modal" data-target="#modal1">
@@ -532,13 +548,16 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
     <script src="<?php echo base_url()?>assets/frontend/js/bootstrap.min.js"> </script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+
       <script src="<?php echo base_url()?>assets/frontend/js/jquery.bootstrap.wizard.js"> </script>
     <!-- <script src="<?php echo base_url()?>assets/frontend/js/jquery.steps.min.js"> </script> -->
     <script>
     $(document).ready(function(){
-    var geojson='<?php echo $light_data ?>';
-    geojson_layer = JSON.parse(geojson);
-    console.log(geojson_layer);
+        var geojson='<?php echo $light_data ?>';
+        geojson_layer = JSON.parse(geojson);
+        console.log(geojson_layer);
 
         var mymap = L.map('mapid').setView([27.7172, 85.3240], 13);
         var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -852,7 +871,7 @@
             $(".aboutBtn ").click(function () {
 
                 $('html, body').animate({
-                    scrollTop: $(".detail").offset().top
+                    scrollTop: $(".about-section").offset().top
                 }, 1000);
             });
             $('#rootwizard').bootstrapWizard({
@@ -932,12 +951,12 @@
           });
 
             
-              $(".sideData").niceScroll({
-                  cursorcolor: "#a7a7a7",
-                  cursorborder: "0px solid #fff",
-                  cursorborderradius: "0px",
-                  cursorwidth: "4px"
-              });
+              // $(".sideData").niceScroll({
+              //     cursorcolor: "#a7a7a7",
+              //     cursorborder: "0px solid #fff",
+              //     cursorborderradius: "0px",
+              //     cursorwidth: "4px"
+              // });
 
           $('.export-btn a').on("click", function (e) {
             e.preventDefault();
