@@ -522,6 +522,15 @@
 
             </div>
         </div>
+        <div class="mappopup">
+          <ul style="list-style: none; min-width: 200px; background:#fff; box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.19); padding:5px; font-size: 0.775rem;">
+            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Coordinator :</label>Khrishna Bhandari</li>
+            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Street light :</label>Khrishna Bhandari</li>
+            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;"> Area number :</label>15</li>
+            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Street light poles :</label>12</li>
+            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Damage light :</label>Khrishna Bhandari</li>
+          </ul>
+        </div>
 
     </section>
 
