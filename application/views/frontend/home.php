@@ -6,7 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Light on</title>
+    <title>Lights on</title>
+
+     <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="<?php echo base_url()?>assets/frontend/image/favicon.png" alt="">
+
     <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/introjs.min.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -133,10 +137,8 @@
             <!-- progress report end -->
 
               <div class="btnflex">
-                <button class="export-btn"> Data</button>
-                <button class="nextprev mt30 aboutbtn">
-                    <span> About US</span>
-                </button>
+                <a class="export-btn" href="#"> Data</a>
+                <a class="export-btn abtbtn" href="#aboutSection"> About US</a>
               </div>
               <h1 data-step="3" data-intro="Click to find out more about Project!"></h1>
           </div>
@@ -498,7 +500,7 @@
     </div>
 
 
-    <section class="detail sectionPadding rlpadding about-section">
+    <section class="detail sectionPadding rlpadding about-section" id="#aboutSection">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
@@ -1039,18 +1041,21 @@
 
 
 
-          $('.export-btn a').on("click", function (e) {
+          $('.btnflex a.abtbtn').on("click", function (e) {
             e.preventDefault();
-              $('.export-btn ul').slideToggle(300);
+            console.log('open');
+              $('.about-section').toggle('slow');
+              var abtScroll = $(".about-section").offset();
+                $('html, body').animate({
+                    scrollTop: (abtScroll - 50)
+                }, 900);
             });
 
         $('.toggle-filter .switch').on("change", function () {
             $('.progress-report').show('slow');
           });
 
-          $('button.aboutbtn').on("click", function () {
-              $('.about-section').toggle('slow');
-            });
+          
         });
 
 
