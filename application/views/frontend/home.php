@@ -509,21 +509,6 @@
                     </video>
                 </div>
                 <div class="col-md-6">
-                    <h2> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus, saepe.</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro libero voluptatem aliquid maxime
-                        veniam voluptatum cum, placeat aperiam optio corrupti exercitationem eius sed minima esse
-                        tempora.
-                        Vitae quasi dolorum tenetur?</p>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro libero voluptatem aliquid maxime
-                        veniam voluptatum cum, placeat aperiam optio corrupti exercitationem eius sed minima esse
-                        tempora.
-                        Vitae quasi dolorum tenetur?</p>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro libero voluptatem aliquid maxime
-                        veniam voluptatum cum, placeat aperiam optio corrupti exercitationem eius sed minima esse
-                        tempora.
-                        Vitae quasi dolorum tenetur? veniam voluptatum cum, placeat aperiam optio corrupti
-                        exercitationem eius sed minima esse
-                        tempora.</p>
 
 
 
@@ -925,7 +910,6 @@
                     $(this).toggleClass("hideSide");
                     $(".sideData-wrap").toggle(500);
                 })
-                
             $(".ipbtn").click(function () {
               $("body").css("overflow", "auto");
                 $(".olay").addClass("hide");
