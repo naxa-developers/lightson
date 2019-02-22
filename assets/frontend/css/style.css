@@ -706,8 +706,6 @@ h2.inpop {
 }
 
 .detail {
-    display: flex;
-    min-height: 100vh;
 }
 
 .sectionPadding {
@@ -1166,7 +1164,9 @@ li{
 }
 .about-section{
     display: none;
+    padding-top:50px;
 }
+
 .LogoText{
     display: flex;
     align-items: center;
@@ -1187,6 +1187,7 @@ min-width: 150px !important;
 .leaflet-popup-content {
     width:98% !important;
 }
+
 @-webkit-keyframes pulse {
   0% {
     -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);

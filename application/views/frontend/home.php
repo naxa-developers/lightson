@@ -500,7 +500,7 @@
     </div>
 
 
-    <section class="detail sectionPadding rlpadding about-section" id="#aboutSection">
+    <section class="detail  about-section" id="aboutSection">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
@@ -1041,15 +1041,24 @@
 
 
 
-          $('.btnflex a.abtbtn').on("click", function (e) {
-            e.preventDefault();
-            console.log('open');
-              $('.about-section').toggle('slow');
-              var abtScroll = $(".about-section").offset();
+          // $('.btnflex a.abtbtn').on("click", function (e) {
+          //   e.preventDefault();
+          //   console.log('open');
+          //     $('.about-section').toggle('slow');
+          //     var abtScroll = $(".about-section").offset();
+          //       $('html, body').animate({
+          //           scrollTop: (abtScroll - 50)
+          //       }, 900);
+          //   });
+
+          $(".btnflex a.abtbtn ").click(function () {
+            $('.about-section').toggle('slow');
+
                 $('html, body').animate({
-                    scrollTop: (abtScroll - 50)
-                }, 900);
+                    scrollTop: $(".about-section").offset().top
+                }, 1000);
             });
+
 
         $('.toggle-filter .switch').on("change", function () {
             $('.progress-report').show('slow');
