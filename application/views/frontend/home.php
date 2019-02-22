@@ -19,14 +19,6 @@
 
     <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/style.css">
 
-
-
-
-
-
-
-
-
 </head>
 
 <body>
@@ -36,7 +28,7 @@
             <div class="logoHolder">
 
                 <span class="LogoText">
-                    LightOn
+                   <img class="" src="<?php echo base_url()?>assets/frontend/image/light.svg" alt=""> Lights On
                 </span>
             </div>
             <?php
@@ -65,89 +57,89 @@
     <div class="mainholder">
       <div class="sideData">
             <div class="arowIcon">
-                <i class="fa fa-arrow-right"></i>
+                <i class="fa fa-arrow-left"></i>
             </div>
+            <div class="sideData-wrap">
+              <div id="chart1" style="height:200px"></div>
+              <!-- <div id="chart2" style="height:200px"></div> -->
+              <div class="charts"></div>
 
-            <div id="chart1" style="height:200px"></div>
-            <!-- <div id="chart2" style="height:200px"></div> -->
-            <div class="charts"></div>
+              <!-- progress report -->
+              <div class="progress-report">
 
-            <!-- progress report -->
-            <div class="progress-report">
-
-              <!-- progress reportOne -->
-              <div class="progressOne">
-                <div class="progressWrapper">
-                  <h4>Solar Light<span class="total-count"><?php echo $pie_data_s ?></span></h4>
-                    <div class="progress-content">
-                        <h5>function</h5>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" id="p_s_func" aria-valuemax="<?php echo $pie_data_s ?>">
-                            <span class="popOver" data-toggle="tooltip" data-placement="top"></span>
-                        </div>
-                        <div class="datashow">
-                            <label>Solar light : </label><span class="progress-value">50%</span>
-                        </div>
-                    </div>
+                <!-- progress reportOne -->
+                <div class="progressOne">
+                  <div class="progressWrapper">
+                    <h4>Solar Light<span class="total-count"><?php echo $pie_data_s ?></span></h4>
+                      <div class="progress-content">
+                          <h5>function</h5>
+                      </div>
+                      <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" id="p_s_func" aria-valuemax="<?php echo $pie_data_s ?>">
+                              <span class="popOver" data-toggle="tooltip" data-placement="top"></span>
+                          </div>
+                          <div class="datashow">
+                              <label>Solar light : </label><span class="progress-value">50%</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="progressWrapper">
+                      <div class="progress-content">
+                          <h5>Non-functional</h5>
+                      </div>
+                      <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" id="p_s_nfunc" aria-valuemax="<?php echo $pie_data_s ?>">
+                              <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
+                          </div>
+                          <div class="datashow">
+                              <label>Non-functional : </label><span class="progress-value">0</span>
+                          </div>
+                      </div>
+                  </div>
                 </div>
-                <div class="progressWrapper">
-                    <div class="progress-content">
-                        <h5>Non-functional</h5>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" id="p_s_nfunc" aria-valuemax="<?php echo $pie_data_s ?>">
-                            <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
-                        </div>
-                        <div class="datashow">
-                            <label>Non-functional : </label><span class="progress-value">0</span>
-                        </div>
-                    </div>
+
+                <!-- progress reportTwo -->
+                <div class="progressTwo">
+                  <div class="progressWrapper">
+                    <h4>Electric Light<span class="total-count"><?php echo $pie_data_e ?></span></h4>
+                      <div class="progress-content">
+                          <h5>function</h5>
+                      </div>
+                      <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_func" aria-valuemax="<?php echo $pie_data_e ?>">
+                              <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
+                          </div>
+                          <div class="datashow">
+                              <label>Function : </label><span class="progress-value">0</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="progressWrapper">
+                      <div class="progress-content">
+                          <h5>Non-functional</h5>
+                      </div>
+                      <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_nfunc" aria-valuemax="<?php echo $pie_data_e ?>">
+                              <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
+                          </div>
+                          <div class="datashow">
+                              <label>Non-functional : </label><span class="progress-value">0</span>
+                          </div>
+                      </div>
+                  </div>
                 </div>
               </div>
 
-              <!-- progress reportTwo -->
-              <div class="progressTwo">
-                <div class="progressWrapper">
-                  <h4>Electric Light<span class="total-count"><?php echo $pie_data_e ?></span></h4>
-                    <div class="progress-content">
-                        <h5>function</h5>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_func" aria-valuemax="<?php echo $pie_data_e ?>">
-                            <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
-                        </div>
-                        <div class="datashow">
-                            <label>Function : </label><span class="progress-value">0</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progressWrapper">
-                    <div class="progress-content">
-                        <h5>Non-functional</h5>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_nfunc" aria-valuemax="<?php echo $pie_data_e ?>">
-                            <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
-                        </div>
-                        <div class="datashow">
-                            <label>Non-functional : </label><span class="progress-value">0</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- progress report end -->
+
+              <div class="btnflex">
+                <button class="export-btn"> Data</button>
+                <button class="nextprev mt30 aboutbtn">
+                    <span> About US</span>
+                </button>
               </div>
-            </div>
-
-          <!-- progress report end -->
-
-            <div class="btnflex">
-              <button class="export-btn"> Data</button>
-              <button class="nextprev mt30 aboutbtn">
-                  <span> About US</span>
-              </button>
-            </div>
-
-                <h1 data-step="3" data-intro="Click to find out more about Project!"></h1>
+              <h1 data-step="3" data-intro="Click to find out more about Project!"></h1>
+          </div>
         </div>
         <section class="main" id="mapid">
 
@@ -924,15 +916,22 @@
     </script>
     <script>
         $(document).ready(function () {
+            // $(".arowIcon").click(function () {
+            //         $(this).toggleClass("hideSide");
+            //         $(".sideData").toggleClass("hideSide");
+            //     })
+
             $(".arowIcon").click(function () {
                     $(this).toggleClass("hideSide");
-                    $(".sideData").toggleClass("hideSide");
+                    $(".sideData-wrap").toggle(500);
                 })
-                .ipbtn
+                
             $(".ipbtn").click(function () {
               $("body").css("overflow", "auto");
                 $(".olay").addClass("hide");
-                $(".sideData").css("overflow-y","scroll");
+                // $(".sideData").css("overflow-y","scroll");
+                $('.arowIcon').toggleClass("hideSide");
+                    $(".sideData-wrap").toggle(500);
             })
         });
     </script>
