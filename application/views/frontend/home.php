@@ -511,21 +511,10 @@
                     </video>
                 </div>
                 <div class="col-md-6">
-                    <h2> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus, saepe.</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro libero voluptatem aliquid maxime
-                        veniam voluptatum cum, placeat aperiam optio corrupti exercitationem eius sed minima esse
-                        tempora.
-                        Vitae quasi dolorum tenetur?</p>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro libero voluptatem aliquid maxime
-                        veniam voluptatum cum, placeat aperiam optio corrupti exercitationem eius sed minima esse
-                        tempora.
-                        Vitae quasi dolorum tenetur?</p>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro libero voluptatem aliquid maxime
-                        veniam voluptatum cum, placeat aperiam optio corrupti exercitationem eius sed minima esse
-                        tempora.
-                        Vitae quasi dolorum tenetur? veniam voluptatum cum, placeat aperiam optio corrupti
-                        exercitationem eius sed minima esse
-                        tempora.</p>
+                    <h2> About</h2>
+                    <p align="justify">With an aim to assist in planned urban development by collection and use of open urban geospatial data, this platform helps in mapping one of the basic urban utilities: Street Lights. Lights ON is a technical tools that allows public, voluntary groups and organizations to collect data on where street lights are and what their conditions are. The crowdsourced data collected using a mobile application is fed into this open web platform showing locations of the street lights. The target is to use this portal for real time information on status of street lights, get a visual sense of how much of the area of the city is lighted and provide baseline data to authorities for better urban development.</p>
+                    <p>Lights On is a joint initiative of Youth Innovation Lab and NAXA with support from Asia Foundation and Data For Development (D4D) to engage youth in digital advocacy campaign.</p>
+
 
 
 
@@ -571,7 +560,7 @@
         }).addTo(mymap);
 
 
-
+      
 
         mymap.attributionControl.addAttribution(
             'this is a product of <b> NAXA </b> ');
@@ -927,7 +916,7 @@
                     $(this).toggleClass("hideSide");
                     $(".sideData-wrap").toggle(500);
                 })
-                
+
             $(".ipbtn").click(function () {
               $("body").css("overflow", "auto");
                 $(".olay").addClass("hide");
@@ -1064,7 +1053,7 @@
             $('.progress-report').show('slow');
           });
 
-          
+
         });
 
 
