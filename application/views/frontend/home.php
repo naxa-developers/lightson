@@ -560,7 +560,7 @@
         }).addTo(mymap);
 
 
-
+      
 
         mymap.attributionControl.addAttribution(
             'this is a product of <b> NAXA </b> ');
