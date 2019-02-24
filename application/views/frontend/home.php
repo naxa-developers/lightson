@@ -22,7 +22,14 @@
 
 
     <link rel="stylesheet" href="<?php echo base_url()?>assets/frontend/css/style.css">
-
+    <style>
+    .leaflet-top.leaflet-right {
+        right: -1;
+        right: auto;
+        top: 75px;
+        left: 8px;
+    }
+    </style>
 </head>
 
 <body>
@@ -150,7 +157,7 @@
 
         <div class="fixedfooter">
             <h1 data-step="1" data-intro="Click and add Markers to map!"></h1>
-            <button class="maptopBtn" type="button" data-toggle="modal" data-target="#modal1">
+            <button class="maptopBtn" id="addlight" type="button" data-toggle="modal" data-target="#modal1">
                 <i class="fa fa-lightbulb">
 
                 </i>
@@ -277,12 +284,9 @@
                                         <div class="tab-pane" id="tab1">
                                           <form action="" method="POST" enctype="multipart/form-data">
                                             <div class="question">
-                                                <h5> 1. Who is your area coordinator? </h5>
-                                                <select name="who_is_your_area_coordinator">
-                                                    <option value="ramSharma">Ram Sharma</option>
-                                                    <option value="KrishnaParsad">Krishna Parsad</option>
-
-                                                </select>
+                                                <h5> 1. Type Your Email </h5>
+                                                <input class="darkInput" type='text' name='email'    placeholder='Enter Your Email'
+                                                 >
 
 
                                             </div>
@@ -310,7 +314,7 @@
                                             </div>
 
 
-                                        <div class="tab-pane" id="tab3">
+                                        <!-- <div class="tab-pane" id="tab3">
                                             <div class="question">
                                                 <h5> 3. What is your area number? </h5>
                                                 <select name="what_is_your_area_number">
@@ -321,11 +325,11 @@
 
 
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="tab-pane" id="tab4">
                                           <div class="question">
-                                              <h5> 4. Type of Street Light </h5>
+                                              <h5> 3. Type of Street Light </h5>
                                               <div class="choice   morechoice d-flex flex-column">
                                                   <label class="rc mr30 rm1">Electric
                                                       <input type="radio" value="electric" name="type_of_street_light">
@@ -522,15 +526,7 @@
 
             </div>
         </div>
-        <div class="mappopup">
-          <ul style="list-style: none; min-width: 200px; background:#fff; box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.19); padding:5px; font-size: 0.775rem;">
-            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Coordinator :</label>Khrishna Bhandari</li>
-            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Street light :</label>Khrishna Bhandari</li>
-            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;"> Area number :</label>15</li>
-            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Street light poles :</label>12</li>
-            <li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Damage light :</label>Khrishna Bhandari</li>
-          </ul>
-        </div>
+
 
     </section>
 
@@ -552,6 +548,8 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="<?php echo base_url()?>/assets/frontend/js/intro.min.js"></script>
     <script src="<?php echo base_url()?>/assets/frontend/js/jquery.nicescroll.min.js"></script>
+    <script src="<?php echo base_url()?>/assets/frontend/js/leaflet.ajax.min.js"></script>
+    <script src="<?php echo base_url()?>/assets/frontend/js/leaflet-bing-layer.js"></script>
 
 
     <script>
@@ -561,15 +559,44 @@
         geojson_layer = JSON.parse(geojson);
         //console.log(geojson_layer);
 
-        var mymap = L.map('mapid').setView([27.7172, 85.3240], 13);
+        mymap = L.map('mapid').setView([27.608421548604188, 85.3887634444982], 11);
         var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 19
-        }).addTo(mymap);
+        });
+
+        const tonerUrl = "http://{S}tile.stamen.com/toner/{Z}/{X}/{Y}.png";
+
+          const url = tonerUrl.replace(/({[A-Z]})/g, s => s.toLowerCase());
+
+          const blackandwhite = L.tileLayer(url, {
+            subdomains: ['', 'a.', 'b.', 'c.', 'd.'],
+            minZoom: 0,
+            maxZoom: 20,
+            type: 'png',
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
+          });//.addTo(mymap);
 
 
-      
+        //L.tileLayer.bing('AoTlmaazzog43ImdKts9HVztFzUI4PEOT0lmo2V4q7f20rfVorJGAgDREKmfQAgd',{imagerySet: 'AerialWithLabels'}).addTo(mymap)
+        var bing = new L.tileLayer.bing({bingMapsKey:'AoTlmaazzog43ImdKts9HVztFzUI4PEOT0lmo2V4q7f20rfVorJGAgDREKmfQAgd',imagerySet: 'AerialWithLabels'});
+        //mymap.addLayer(bing);
+
+        var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+
+        var baseLayers = {
+          "OSM Dark Theme": CartoDB_DarkMatter,
+          "OSM Light Theme": blackandwhite,
+          "Openstreetmap": osm,
+          "Bing Aerial": bing
+        };
+        CartoDB_DarkMatter.addTo(mymap);
+
+        layerswitcher = L.control.layers(baseLayers,null,{collapsed:true}).addTo(mymap);
+
 
         mymap.attributionControl.addAttribution(
             'this is a product of <b> NAXA </b> ');
@@ -634,7 +661,19 @@
           onEachFeature: function(feature, layer) {
         //  console.log(feature.properties);
 
-            layer.bindPopup(""+feature.properties.id);
+
+
+
+          var popCont='';
+          popCont+='<div class="mappopup">';
+          popCont+='<img src="uploads/11.jpg" alt="map" style="padding:2px; border:1px solid #efefef;max-width:100%; height:auto;">';
+          popCont+='<ul style="list-style: none; min-width: 200px; background:#fff; box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.19); padding:5px; font-size: 0.775rem;">'
+          popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Coordinator :</label>Khrishna Bhandari</li>';
+          popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Street light :</label>Khrishna Bhandari</li>';
+          popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Street light :</label>Khrishna Bhandari</li>';
+          popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Street light :</label>Khrishna Bhandari</li>';
+          popCont+='</ul></div>';
+            layer.bindPopup(popCont);
             //feature.properties.layer_name = "transit_stops";
             //add if condition
             if(feature.properties.type_of_street_light == "solar"){
@@ -671,14 +710,147 @@
         electric_functional.addTo(mymap);
         electric_nonfunctional.addTo(mymap);
 
+        // loading layers Ward_Boundary
+        kathmandu = new L.geoJson.ajax("./geojson/Kathmandu.geojson", {
+                    onEachFeature: function (feature, layer) {
+                        var popUpContent = "";
+                        popUpContent += '<table style="width:100%;" id="TAL-popup" class="popuptable">';
+                        //for (data in layer.feature.properties) {
+                            //console.log(feature);
+                            //dataspaced = underscoreToSpace(data);
+                            popUpContent += "<tr>" + "<td>District </td>" + "<td>" + "  " + layer.feature.properties.FIRST_DIST + "</td>" + "</tr>";
+              popUpContent += "<tr>" + "<td>Municiplity </td>" + "<td>" + "  " + layer.feature.properties.FIRST_GaPa + "</td>" + "</tr>";
+              //popUpContent += "<tr>" + "<td>Perimeter </td>" + "<td>" + "  " + layer.feature.properties.Perimeter + "</td>" + "</tr>";
+                        //}
+                        popUpContent += '</table>';
+
+                        layer.bindPopup(L.popup({
+                            closeOnClick: true,
+                            closeButton: true,
+                            keepInView: true,
+                            autoPan: true,
+                            maxHeight: 200,
+                            minWidth: 250
+                        }).setContent(popUpContent));
+
+
+                    }
+                });
+                kathmandu.on('data:loaded', function (data) {
+                    kathmandu.setStyle({
+                            fillColor: 'green',
+                            weight: 1,
+                            opacity:0.5,
+                            color: 'yellow',
+                            //dashArray: '3',
+                            fillOpacity: 0
+
+                    });
+                    console.log("Ward Layer Added");
+                    //map.fitBounds(Ward_Boundary.getBounds(), {padding:[-50,-50]});
+                });
+                kathmandu.addTo(mymap);
+
+
+                lalitpur = new L.geoJson.ajax("./geojson/Lalitpur.geojson", {
+                    onEachFeature: function (feature, layer) {
+                        var popUpContent = "";
+                        popUpContent += '<table style="width:100%;" id="TAL-popup" class="popuptable">';
+                        //for (data in layer.feature.properties) {
+                            console.log(feature);
+                            //dataspaced = underscoreToSpace(data);
+                            popUpContent += "<tr>" + "<td>Name </td>" + "<td>" + "  " + layer.feature.properties.FIRST_DIST + "</td>" + "</tr>";
+              popUpContent += "<tr>" + "<td>Area </td>" + "<td>" + "  " + layer.feature.properties.FIRST_GaPa + "</td>" + "</tr>";
+              //popUpContent += "<tr>" + "<td>Perimeter </td>" + "<td>" + "  " + layer.feature.properties.Perimeter + "</td>" + "</tr>";
+                        //}
+                        popUpContent += '</table>';
+
+                        layer.bindPopup(L.popup({
+                            closeOnClick: true,
+                            closeButton: true,
+                            keepInView: true,
+                            autoPan: true,
+                            maxHeight: 200,
+                            minWidth: 250
+                        }).setContent(popUpContent));
+
+
+                    }
+                });
+                lalitpur.on('data:loaded', function (data) {
+                    lalitpur.setStyle({
+                            fillColor: 'green',
+                            weight: 1,
+                            opacity: 0.5,
+                            color: 'yellow',
+                            //dashArray: '3',
+                            fillOpacity: 0
+
+                    });
+                    console.log("Ward Layer Added");
+                    //map.fitBounds(Ward_Boundary.getBounds(), {padding:[-50,-50]});
+                });
+                lalitpur.addTo(mymap);
+
+
+            bhaktapur = new L.geoJson.ajax("./geojson/Bhaktapur.geojson", {
+                    onEachFeature: function (feature, layer) {
+                        var popUpContent = "";
+                        popUpContent += '<table style="width:100%;" id="TAL-popup" class="popuptable">';
+                        //for (data in layer.feature.properties) {
+                            console.log(feature);
+                            //dataspaced = underscoreToSpace(data);
+                            popUpContent += "<tr>" + "<td>District </td>" + "<td>" + "  " + layer.feature.properties.FIRST_DIST + "</td>" + "</tr>";
+              popUpContent += "<tr>" + "<td>Municipality </td>" + "<td>" + "  " + layer.feature.properties.FIRST_GaPa + "</td>" + "</tr>";
+              //popUpContent += "<tr>" + "<td>Perimeter </td>" + "<td>" + "  " + layer.feature.properties.Perimeter + "</td>" + "</tr>";
+                        //}
+                        popUpContent += '</table>';
+
+                        layer.bindPopup(L.popup({
+                            closeOnClick: true,
+                            closeButton: true,
+                            keepInView: true,
+                            autoPan: true,
+                            maxHeight: 200,
+                            minWidth: 250
+                        }).setContent(popUpContent));
+
+
+                    }
+                });
+                bhaktapur.on('data:loaded', function (data) {
+                    bhaktapur.setStyle({
+                            fillColor: 'green',
+                            weight: 1,
+                            opacity: 0.5,
+                            color: 'yellow',
+                            //dashArray: '3',
+                            fillOpacity: 0
+
+                    });
+                    console.log("Ward Layer Added");
+                    //map.fitBounds(Ward_Boundary.getBounds(), {padding:[-50,-50]});
+                });
+                bhaktapur.addTo(mymap);
+        //end
+
         $('.switch-input').on('change',function(){
         //  console.log('clicked');
-          if(mymap.hasLayer(CartoDB_DarkMatter)){
+        var checked =$(this). prop("checked");
+        console.log(checked);
+          if(checked){
+            if(mymap.hasLayer(bing)){
+                mymap.removeLayer(bing);
+            }
             mymap.removeLayer(CartoDB_DarkMatter);
-            mymap.addLayer(OpenStreetMap_France);
+            mymap.addLayer(blackandwhite);
           }else{
-            mymap.removeLayer(OpenStreetMap_France);
+             if(mymap.hasLayer(bing)){
+                mymap.removeLayer(bing);
+            }
+            mymap.removeLayer(blackandwhite);
             mymap.addLayer(CartoDB_DarkMatter);
+
           }
 
 
@@ -770,12 +942,42 @@
 
 
     var mymap1 = L.map('iframeMap').setView([27.7172, 85.3240], 13);
-    var CartoDB_DarkMatter1 = L.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    var CartoDB_DarkMatter1 = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 19
-        }).addTo(mymap1);
+        });//.addTo(mymap);
+
+        const tonerUrl1 = "http://{S}tile.stamen.com/toner/{Z}/{X}/{Y}.png";
+
+          const url1 = tonerUrl1.replace(/({[A-Z]})/g, s => s.toLowerCase());
+
+          const blackandwhite1 = L.tileLayer(url1, {
+            subdomains: ['', 'a.', 'b.', 'c.', 'd.'],
+            minZoom: 0,
+            maxZoom: 20,
+            type: 'png',
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
+          });//.addTo(mymap);
+
+
+        //L.tileLayer.bing('AoTlmaazzog43ImdKts9HVztFzUI4PEOT0lmo2V4q7f20rfVorJGAgDREKmfQAgd',{imagerySet: 'AerialWithLabels'}).addTo(mymap)
+        var bing1 = new L.tileLayer.bing({bingMapsKey:'AoTlmaazzog43ImdKts9HVztFzUI4PEOT0lmo2V4q7f20rfVorJGAgDREKmfQAgd',imagerySet: 'AerialWithLabels'});
+        //mymap.addLayer(bing);
+
+        var osm1 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+
+        var baseLayers1 = {
+          "OSM Dark Theme": CartoDB_DarkMatter1,
+          "OSM Light Theme": blackandwhite1,
+          "Openstreetmap": osm1,
+          "Bing Aerial": bing1
+        };
+        bing1.addTo(mymap1);
+
+        layerswitcher1 = L.control.layers(baseLayers1,null,{collapsed:true}).addTo(mymap1);
 
         var marker = L.marker([27.710623, 85.327163], {
             draggable: true
@@ -932,6 +1134,11 @@
                 // $(".sideData").css("overflow-y","scroll");
                 $('.arowIcon').toggleClass("hideSide");
                     $(".sideData-wrap").toggle(500);
+            })
+
+            $("#addlight").click(function () {
+
+              $(".sideData-wrap").hide();
             })
         });
     </script>
