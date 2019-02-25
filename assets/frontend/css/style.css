@@ -1185,7 +1185,7 @@ li{
 min-width: 150px !important;
 }
 .leaflet-popup-content {
-    width:98% !important;
+    /*width:98% !important;*/
 }
 
 @-webkit-keyframes pulse {
