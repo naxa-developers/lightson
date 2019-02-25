@@ -275,14 +275,14 @@
                         <div class="tab-pane" id="tab1"> 
                           <form action="" method="POST" enctype="multipart/form-data">                                           
                             <div class="question">
-                              <h5> 1. Type Your Email </h5>
-                              <input class="darkInput" type='text' name='email'    placeholder='Enter Your Email'
+                              <h5> 1. Enter your email address</h5>
+                              <input class="darkInput" type='text' name='email'    placeholder='Email address'
                                >
                             </div>
                           </div>
                           <div class="tab-pane" id="tab2">
                             <div class="question">
-                                <h5> 2. Where is this street light located? </h5>
+                                <h5> 2. Where is this street light located ? </h5>
                                 <div class="choice d-flex   flex-column  ">
                                     <label class="rc mr30">Highway
                                         <input type="radio" value="highway" name="where_is_this_street_light_located">
@@ -342,14 +342,14 @@
                                     </label>
                                     <label id="otherinput">
                                       <input class="darkInput mt15 inputmore" type='text' name='type_of_street_light_poles_other' id='name'
-                                          placeholder='Enter Your Name'>
+                                          placeholder='Enter type of street light pole'>
                                     </label>
                                 </div>
                             </div>
                           </div>
                           <div class="tab-pane" id="tab6">
                             <div class="question">
-                                <h5> 6. What is status of  street light</h5>
+                                <h5> 6. What is status of  street light ?</h5>
                                 <div class="choice   morechoice d-flex flex-column">
                                     <label class="rc mr30 rm">Functional
                                         <input type="radio" value="functional" name="what_is_the_status_of_street_light">
@@ -384,15 +384,15 @@
                           <div class="tab-pane" id="tab9">
                             <div class="question">
                               <h5> Latitude </h5>
-                              <input class="darkInput" type='text' name='latitude' id='latitude' value=''  placeholder='Enter Your Name'
+                              <input class="darkInput" type='text' name='latitude' id='latitude' value=''  placeholder='Enter Your Latitude'
                                required>
                               <span class="error"> Latitude </span>
                               <h5> Longitude </h5>
-                              <input class="darkInput" type='text' name='longitude' id='longitude' value=''  placeholder='Enter Your Name'
+                              <input class="darkInput" type='text' name='longitude' id='longitude' value=''  placeholder='Enter Your Longitude'
                                   required>
                               <span class="error"> Longitude </span>
                             </div>
-                            <button  name="submit" type="submit"><span>submit</span></button>
+                            <button  name="submit" type="submit"><span>Submit</span></button>
                           </form>
                         </div>
                         <ul class="pager wizard d-flex justify-content-end buttons ">
@@ -401,11 +401,11 @@
                               </button>
                             </li>
                             <li class="previous"><button class="nextprev">
-                              <span>PREVIOUS</span>
+                              <span>Previous</span>
                               </button>
                             </li>
                             <li class="next last" style="display:none;"><button class="nextprev">
-                              <span>LAST</span>
+                              <span>Last</span>
                               </button>
                             </li>
                             <li class="next"><button class="nextprev">
@@ -591,14 +591,14 @@
 
 
           var popCont='';
-          popCont+='<div class="mappopup">';
-          popCont+='<img src="'+feature.properties.photo_thumb+'" alt="map" style="padding:2px; border:1px solid #efefef;max-width:200px; height:auto;">';
-          popCont+='<ul style="list-style: none;  font-size: 0.775rem;">'
-          popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Email: </label>'+feature.properties.email+'</li>';
-          popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Where Is The Street Light Located : </label>'+feature.properties.where_is_this_street_light_located+'</li>';
-          popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Type of street lightt :</label>'+feature.properties.type_of_street_light+'</li>';
-          popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">what_is_the_status_of_street_light :</label>'+feature.properties.what_is_the_status_of_street_light+'</li>';
-          popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">damage_details_of_the_street_light :</label>'+feature.properties.damage_details_of_the_street_light+'</li>';
+          popCont+='<div class="mappopup" style="max-height:300px; overflow-y:auto; max-width:400px; width:100%;">';
+          popCont+='<img src="'+feature.properties.photo_thumb+'" alt="map" style="padding:2px; border:1px solid #efefef;max-width:100%; height:auto;">';
+          popCont+='<ul style="list-style: none;  font-size: 0.775rem; padding:5px; border:1px solid #efefef;">'
+          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Email: </label>'+feature.properties.email+'</li>';
+          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Where Is The Street Light Located : </label>'+feature.properties.where_is_this_street_light_located+'</li>';
+          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Type of street lightt :</label>'+feature.properties.type_of_street_light+'</li>';
+          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">what_is_the_status_of_street_light :</label>'+feature.properties.what_is_the_status_of_street_light+'</li>';
+          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">damage_details_of_the_street_light :</label>'+feature.properties.damage_details_of_the_street_light+'</li>';
           popCont+='</ul></div>';
             layer.bindPopup(popCont);
             //feature.properties.layer_name = "transit_stops";
@@ -657,7 +657,7 @@
                             keepInView: true,
                             autoPan: true,
                             maxHeight: 200,
-                            minWidth: 250
+                            minWidth: 300
                         }).setContent(popUpContent));
 
 
@@ -739,7 +739,7 @@
                             keepInView: true,
                             autoPan: true,
                             maxHeight: 200,
-                            minWidth: 250
+                            minWidth: 300
                         }).setContent(popUpContent));
 
 
@@ -1190,11 +1190,14 @@
             $('.progress-report').show('slow');
           });
 
+            
             $('p.layerpopup').parent('.leaflet-popup-content').css('width','100%');
 
 
-
         });
+        $(document).ready(function(){
+          $('.mappopup').parent('.leaflet-popup-content').css({"max-width":"400px","width":"100%"});
+        })
     </script>
 
 </body>
