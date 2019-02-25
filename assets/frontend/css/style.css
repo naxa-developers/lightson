@@ -432,6 +432,18 @@ button.btn-primary {
     outline: none;
     box-shadow: none;
 }
+.question button[type="submit"]{
+    background: var(--yellow);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    outline: none;
+    box-shadow: none;
+
+}
 
 .darkInput {
     background: rgba(0, 0, 0, 0.2);
@@ -543,20 +555,25 @@ tspan {
 
 .initialPopover {
     background: #bdbdbd;
-    height: 330px;
-    width: 500px;
+    max-width: 500px;
+    width: 96%;
+    margin: 0 2%;
+    margin:0 auto;
     position: fixed;
     top: 50%;
-    margin-top: -165px;
-    left: 50%;
-    margin-left: -250px;
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left:0;
+    right:0;
     z-index: 10000;
     padding: 30px;
     border-radius: 4px;
 }
 
 h2.inpop {
-    font-size: 2.1rem;
+    font-size: 1.8rem;
     color: #a78708;
     margin-bottom: 30px;
 }
@@ -1212,4 +1229,64 @@ min-width: 150px !important;
       -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
       box-shadow: 0 0 0 0 rgba(204,169,44, 0);
   }
+}
+.alert{
+    position: absolute;
+    padding: .75rem 1.25rem;
+    border:none;
+    border-radius: .25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: 500px;
+    background-color:var(--yellow);
+    color:#333;
+}
+#iframeMap{
+    height: 500px;
+    width:100%;
+}
+
+@media screen and (max-width:767px){
+    .main {
+        height:400px;
+    }
+    #iframeMap{
+        height: 300px;
+    }
+    #rootwizard .tab-content{
+        padding:15px;
+    }
+    .initialPopover {
+        padding: 15px;
+    }
+    h2.inpop {
+        font-size: 1.5rem;
+        color: #a78708;
+        margin-bottom: 15px;
+    }
+    .sideData {
+        position: unset;
+        top: unset;
+        right: unset;
+        bottom: unset;        
+        clear: both;
+        background: #000;
+    }
+    .sideData-wrap {
+        width: 100%;
+        height: auto;
+        padding: 30px;
+    }
+    .legends {
+        bottom: inherit;
+        top: 170px;
+    }
+    .arowIcon {
+        align-items: center;
+        justify-content: left;
+        width: 100%;
+        padding-left: 10px;
+    }
 }

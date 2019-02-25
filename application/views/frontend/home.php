@@ -33,11 +33,11 @@
 </head>
 
 <body>
+
+    <!-- header start -->
     <header>
         <div class="container-fluid d-flex align-items-center  custom-flex">
-
             <div class="logoHolder">
-
                 <span class="LogoText">
                    <img class="" src="<?php echo base_url()?>assets/frontend/image/light.svg" alt=""> Lights On
                 </span>
@@ -48,462 +48,398 @@
                if($error){ ?>
 
                  <div class="alert alert-info alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Message!!!!</strong> <?php echo $error ; ?>
-                      </div>
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Message!!!!</strong> <?php echo $error ; ?>
+                  </div>
                <?php
                }
                 ?>
             <div class="switch right ">
-
                 <input type="checkbox" id="id-name--1" name="set-name" class="switch-input toglbtn">
                 <label for="id-name--1" class="switch-label"><span class="toggle--on">Darkmode</span><span class="toggle--off">Lightmode</span></label>
             </div>
 
         </div>
-
-
-
     </header>
+    <!-- header end -->
+
     <div class="mainholder">
-      <div class="sideData">
-            <div class="arowIcon">
-                <i class="fa fa-arrow-left"></i>
-            </div>
-            <div class="sideData-wrap">
-              <div id="chart1" style="height:200px"></div>
-              <!-- <div id="chart2" style="height:200px"></div> -->
-              <div class="charts"></div>
 
-              <!-- progress report -->
-              <div class="progress-report">
+        <!-- leaflet map -->
+        <section class="main" id="mapid">
+            <div class="fixedfooter">
+              <!-- <h1 data-step="1" data-intro="Click and add Markers to map!"></h1> -->
+              <button class="maptopBtn" id="addlight" type="button" data-toggle="modal" data-target="#modal1">
+                  <i class="fa fa-lightbulb">
+                  </i>
+                  <span>ADD LIGHT TO MAP</span>
+                  <img class="bulb" src="<?php echo base_url()?>assets/frontend/image/light.svg" alt="">
+              </button>
+          </div>
+        </section>
+        <!-- leaftlet map end -->
+        
+        <!-- mapside data -->
+        <div class="sideData">
 
-                <!-- progress reportOne -->
-                <div class="progressOne">
-                  <div class="progressWrapper">
-                    <h4>Solar Light<span class="total-count"><?php echo $pie_data_s ?></span></h4>
-                      <div class="progress-content">
-                          <h5>function</h5>
-                      </div>
-                      <div class="progress">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" id="p_s_func" aria-valuemax="<?php echo $pie_data_s ?>">
-                              <span class="popOver" data-toggle="tooltip" data-placement="top"></span>
-                          </div>
-                          <div class="datashow">
-                              <label>Solar light : </label><span class="progress-value">50%</span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="progressWrapper">
-                      <div class="progress-content">
-                          <h5>Non-functional</h5>
-                      </div>
-                      <div class="progress">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" id="p_s_nfunc" aria-valuemax="<?php echo $pie_data_s ?>">
-                              <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
-                          </div>
-                          <div class="datashow">
-                              <label>Non-functional : </label><span class="progress-value">0</span>
-                          </div>
-                      </div>
-                  </div>
+          <!-- showhide arrow-->
+          <div class="arowIcon">
+              <i class="fa fa-arrow-left"></i>
+          </div>
+
+          <!-- mapside data content-->
+          <div class="sideData-wrap">
+            <div id="chart1" style="height:200px"></div>
+            <!-- <div id="chart2" style="height:200px"></div> -->
+            <div class="charts"></div>
+
+            <!-- progress report -->
+            <div class="progress-report">
+
+              <!-- progress reportOne -->
+              <div class="progressOne">
+                <div class="progressWrapper">
+                  <h4>Solar Light<span class="total-count"><?php echo $pie_data_s ?></span></h4>
+                    <div class="progress-content">
+                        <h5>function</h5>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" id="p_s_func" aria-valuemax="<?php echo $pie_data_s ?>">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top"></span>
+                        </div>
+                        <div class="datashow">
+                            <label>Solar light : </label><span class="progress-value">50%</span>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- progress reportTwo -->
-                <div class="progressTwo">
-                  <div class="progressWrapper">
-                    <h4>Electric Light<span class="total-count"><?php echo $pie_data_e ?></span></h4>
-                      <div class="progress-content">
-                          <h5>function</h5>
-                      </div>
-                      <div class="progress">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_func" aria-valuemax="<?php echo $pie_data_e ?>">
-                              <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
-                          </div>
-                          <div class="datashow">
-                              <label>Function : </label><span class="progress-value">0</span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="progressWrapper">
-                      <div class="progress-content">
-                          <h5>Non-functional</h5>
-                      </div>
-                      <div class="progress">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_nfunc" aria-valuemax="<?php echo $pie_data_e ?>">
-                              <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
-                          </div>
-                          <div class="datashow">
-                              <label>Non-functional : </label><span class="progress-value">0</span>
-                          </div>
-                      </div>
-                  </div>
+                <div class="progressWrapper">
+                    <div class="progress-content">
+                        <h5>Non-functional</h5>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" id="p_s_nfunc" aria-valuemax="<?php echo $pie_data_s ?>">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
+                        </div>
+                        <div class="datashow">
+                            <label>Non-functional : </label><span class="progress-value">0</span>
+                        </div>
+                    </div>
                 </div>
               </div>
+
+              <!-- progress reportTwo -->
+              <div class="progressTwo">
+                <div class="progressWrapper">
+                  <h4>Electric Light<span class="total-count"><?php echo $pie_data_e ?></span></h4>
+                    <div class="progress-content">
+                        <h5>function</h5>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_func" aria-valuemax="<?php echo $pie_data_e ?>">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
+                        </div>
+                        <div class="datashow">
+                            <label>Function : </label><span class="progress-value">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progressWrapper">
+                    <div class="progress-content">
+                        <h5>Non-functional</h5>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" id="p_e_nfunc" aria-valuemax="<?php echo $pie_data_e ?>">
+                            <span class="popOver" data-toggle="tooltip" data-placement="top">0</span>
+                        </div>
+                        <div class="datashow">
+                            <label>Non-functional : </label><span class="progress-value">0</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
 
             <!-- progress report end -->
-
-              <div class="btnflex">
-                <a class="export-btn" href="#"> Data</a>
-                <a class="export-btn abtbtn" href="#aboutSection"> About US</a>
-              </div>
-              <h1 data-step="3" data-intro="Click to find out more about Project!"></h1>
+            <div class="btnflex">
+              <a class="export-btn" href="#"> Data</a>
+              <a class="export-btn abtbtn" href="#aboutSection"> About US</a>
+            </div>
+            <h1 data-step="3" data-intro="Click to find out more about Project!"></h1>
           </div>
+          <!-- mapside data content end-->
         </div>
-        <section class="main" id="mapid">
-
-
-        </section>
-
-        <div class="fixedfooter">
-            <h1 data-step="1" data-intro="Click and add Markers to map!"></h1>
-            <button class="maptopBtn" id="addlight" type="button" data-toggle="modal" data-target="#modal1">
-                <i class="fa fa-lightbulb">
-
-                </i>
-                <span>ADD LIGHT TO MAP</span>
-                <img class="bulb" src="<?php echo base_url()?>assets/frontend/image/light.svg" alt="">
-
-            </button>
-        </div>
-
+        <!-- mapside data end -->
         <!--Lagend start -->
         <div class="legends">
-
           <!-- filter section Upadated-->
-            <div class="filter">
-                <form>
-                    <ul>
-                        <li>
-                          <!-- sub filter -->
-                          <div class="toggle-subfilter">
-                            <h5>Solar Light </h5>
-                            <!-- filter -->
-                            <div class="toggle-filter">
-                              <p>functional</p>
-                              <div class="switch">
-                                  <input type="checkbox" value = "solar_functional" class="CheckBox" id="function-btn" checked>
-                                  <label for ="function-btn"></label>
-                              </div>
-                            </div>
+          <div class="filter">
+            <form>
+              <ul>
+                  <li>
+                    <!-- sub filter -->
+                    <div class="toggle-subfilter">
+                      <h5>Solar Light </h5>
+                      <!-- filter -->
+                      <div class="toggle-filter">
+                        <p>functional</p>
+                        <div class="switch">
+                            <input type="checkbox" value = "solar_functional" class="CheckBox" id="function-btn" checked>
+                            <label for ="function-btn"></label>
+                        </div>
+                      </div>
 
-                            <!-- filter -->
-                            <div class="toggle-filter">
-                              <p>Non-functional</p>
-                              <div class="switch">
-                                  <input type="checkbox" value="solar_nonfunctional" class="CheckBox" id="nonfunction-btn" checked>
-                                  <label for ="nonfunction-btn"></label>
-                              </div>
-                            </div>
+                      <!-- filter -->
+                      <div class="toggle-filter">
+                        <p>Non-functional</p>
+                        <div class="switch">
+                            <input type="checkbox" value="solar_nonfunctional" class="CheckBox" id="nonfunction-btn" checked>
+                            <label for ="nonfunction-btn"></label>
+                        </div>
+                      </div>
 
-                          </div>
-                        </li>
-                        <li>
-                          <!-- sub filter -->
-                          <div class="toggle-subfilter">
-                            <h5>Electric Light</h5>
-                            <!--filter -->
-                            <div class="toggle-filter">
-                              <p>functional</p>
-                              <div class="switch">
-                                  <input type="checkbox" value = "electric_functional" class="CheckBox" id="electric-btn" checked>
-                                  <label for ="electric-btn"></label>
-                              </div>
-                            </div>
+                    </div>
+                  </li>
+                  <li>
+                    <!-- sub filter -->
+                    <div class="toggle-subfilter">
+                      <h5>Electric Light</h5>
+                      <!--filter -->
+                      <div class="toggle-filter">
+                        <p>functional</p>
+                        <div class="switch">
+                            <input type="checkbox" value = "electric_functional" class="CheckBox" id="electric-btn" checked>
+                            <label for ="electric-btn"></label>
+                        </div>
+                      </div>
 
-                            <!--filter -->
-                            <div class="toggle-filter">
-                              <p>Non-functional</p>
-                              <div class="switch">
-                                  <input type="checkbox" value="electric_nonfunctional" class="CheckBox" id="nonelectric-btn" checked>
-                                  <label for ="nonelectric-btn"></label>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                    </ul>
-
-                </form>
-            </div>
+                      <!--filter -->
+                      <div class="toggle-filter">
+                        <p>Non-functional</p>
+                        <div class="switch">
+                            <input type="checkbox" value="electric_nonfunctional" class="CheckBox" id="nonelectric-btn" checked>
+                            <label for ="nonelectric-btn"></label>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+              </ul>
+            </form>
+          </div>
         </div>
 
         <!--lagend end -->
 
-        <h1 data-step="2" data-intro="Click and find in the map  different types of lights being used"></h1>
+        <!-- <h1 data-step="2" data-intro="Click and find in the map  different types of lights being used"></h1> -->
     </div>
 
     <!-- Modal -->
     <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Adding Light </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Adding Light </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+                <div class="col-md-7">
+                  <div id="iframeMap" style="">
+                  </div>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div id="iframeMap" style="height:500px;width:100%;">
-                                <!-- <iframe class="if" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d41859.45387494911!2d85.29525368777576!3d27.710926335140037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198a307baabf%3A0xb5137c1bf18db1ea!2sKathmandu+44600!5e0!3m2!1sen!2snp!4v1550050391018"
-                                    width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe> -->
-                            </div>
-
+                <div class="col-md-5">
+                  <div>
+                    <div id="rootwizard">
+                      <div class="navbar">
+                        <div class="navbar-inner">
+                          <ul>
+                              <li><a href="#tab1" data-toggle="tab">First</a></li>
+                              <li><a href="#tab2" data-toggle="tab">Second</a></li>
+                              <li><a href="#tab3" data-toggle="tab">Third</a></li>
+                              <li><a href="#tab4" data-toggle="tab">Forth</a></li>
+                              <li><a href="#tab5" data-toggle="tab">Fifth</a></li>
+                              <li><a href="#tab6" data-toggle="tab">Sixth</a></li>
+                              <li><a href="#tab7" data-toggle="tab">Seventh</a></li>
+                              <li><a href="#tab8" data-toggle="tab">Eighth</a></li>
+                              <li><a href="#tab9" data-toggle="tab">Ninth</a></li>
+                          </ul>
                         </div>
-
-                        <div class="col-md-5">
-
-                            <div>
-                                <div id="rootwizard">
-                                    <div class="navbar">
-                                        <div class="navbar-inner">
-
-                                            <ul>
-                                                <li><a href="#tab1" data-toggle="tab">First</a></li>
-                                                <li><a href="#tab2" data-toggle="tab">Second</a></li>
-                                                <li><a href="#tab3" data-toggle="tab">Third</a></li>
-                                                <li><a href="#tab4" data-toggle="tab">Forth</a></li>
-                                                <li><a href="#tab5" data-toggle="tab">Fifth</a></li>
-                                                <li><a href="#tab6" data-toggle="tab">Sixth</a></li>
-                                                <li><a href="#tab7" data-toggle="tab">Seventh</a></li>
-                                                <li><a href="#tab8" data-toggle="tab">Eighth</a></li>
-                                                <li><a href="#tab9" data-toggle="tab">Ninth</a></li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                    <div id="bar" class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
-                                            aria-valuemax="100" style="width: 0%;"></div>
-                                    </div>
-
-                                    <div class="tab-content">
-                                        <div class="tab-pane" id="tab1">
-                                          <form action="" method="POST" enctype="multipart/form-data">
-                                            <div class="question">
-                                                <h5> 1. Type Your Email </h5>
-                                                <input class="darkInput" type='text' name='email'    placeholder='Enter Your Email'
-                                                 >
-
-
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tab2">
-
-                                              <div class="question">
-                                                  <h5> 2. Where is this street light located? </h5>
-                                                  <div class="choice d-flex   flex-column  ">
-                                                      <label class="rc mr30">Highway
-                                                          <input type="radio" value="highway" name="where_is_this_street_light_located">
-                                                          <span class="checkmark"></span>
-                                                      </label>
-                                                      <label class="rc mr30">Road
-                                                          <input type="radio" value="road" name="where_is_this_street_light_located">
-                                                          <span class="checkmark"></span>
-                                                      </label>
-                                                      <label class="rc mr30">Alley
-                                                          <input type="radio" value="alley" name="where_is_this_street_light_located">
-                                                          <span class="checkmark"></span>
-                                                      </label>
-                                                  </div>
-                                              </div>
-
-                                            </div>
-
-
-                                        <!-- <div class="tab-pane" id="tab3">
-                                            <div class="question">
-                                                <h5> 3. What is your area number? </h5>
-                                                <select name="what_is_your_area_number">
-                                                    <option value="a1">Area 1</option>
-                                                    <option value="a2">Area 2</option>
-
-                                                </select>
-
-
-                                            </div>
-                                        </div> -->
-
-                                        <div class="tab-pane" id="tab4">
-                                          <div class="question">
-                                              <h5> 3. Type of Street Light </h5>
-                                              <div class="choice   morechoice d-flex flex-column">
-                                                  <label class="rc mr30 rm1">Electric
-                                                      <input type="radio" value="electric" name="type_of_street_light">
-                                                      <span class="checkmark"></span>
-                                                  </label>
-                                                  <label class="rc mr30 rm1">Solar
-                                                      <input type="radio" value="solar" name="type_of_street_light">
-                                                      <span class="checkmark"></span>
-                                                  </label>
-
-                                              </div>
-                                          </div>
-
-
-                                        </div>
-
-                                        <div class="tab-pane" id="tab5">
-
-                                          <div class="question">
-                                              <h5> 5. Type of street light poles </h5>
-                                              <div class="choice   morechoice d-flex flex-column">
-                                                  <label class="rc mr30 rm">Wood
-                                                      <input type="radio" value="wood" name="type_of_street_light_poles">
-                                                      <span class="checkmark"></span>
-                                                  </label>
-                                                  <label class="rc mr30 rm">Concrete
-                                                      <input type="radio" value="concrete" name="type_of_street_light_poles">
-                                                      <span class="checkmark"></span>
-                                                  </label>
-                                                  <label class="rc mr30">Other
-                                                      <input type="radio" id="others" name="other">
-                                                      <span class="checkmark"></span>
-                                                  </label>
-                                                  <label id="otherinput">
-                                                    <input class="darkInput mt15 inputmore" type='text' name='type_of_street_light_poles_other' id='name'
-                                                        placeholder='Enter Your Name'>
-                                                  </label>
-
-                                              </div>
-                                          </div>
-
-                                        </div>
-                                        <div class="tab-pane" id="tab6">
-
-                                          <div class="question">
-                                              <h5> 6. What is status of  street light</h5>
-                                              <div class="choice   morechoice d-flex flex-column">
-                                                  <label class="rc mr30 rm">Functional
-                                                      <input type="radio" value="functional" name="what_is_the_status_of_street_light">
-                                                      <span class="checkmark"></span>
-                                                  </label>
-                                                  <label class="rc mr30 rm">Non functional
-                                                      <input type="radio" value="non functional" name="what_is_the_status_of_street_light">
-                                                      <span class="checkmark"></span>
-                                                  </label>
-
-                                              </div>
-                                          </div>
-                                        </div>
-
-
-
-                                        <div class="tab-pane" id="tab7">
-
-                                          <div class="question">
-                                              <h5> 7. Damage Detail of the street light</h5>
-                                              <!-- <div class="choice   morechoice d-flex flex-column"> -->
-                                                  <!-- <label class="rc mr30 rm">Solar powered -->
-                                                      <!-- <input type="radio" name="radio"> -->
-                                                      <textarea class="darkInput" name="damage_details_of_the_street_light" rowsize="5"></textarea>
-                                                      <!-- <span class="checkmark"></span> -->
-                                                  <!-- </label> -->
-
-                                              <!-- </div> -->
-                                          </div>
-                                        </div>
-
-
-                                        <div class="tab-pane" id="tab8">
-                                          <div class="question">
-
-                                            <h5>Select image to upload:</h5>
-                                <input type="file" name="photo" id="fileToUpload">
-                                        </div>
-                                        </div>
-
-                                        <div class="tab-pane" id="tab9">
-
-                                          <div class="question">
-
-                                            <h5> Latitude </h5>
-
-                                            <input class="darkInput" type='text' name='latitude' id='latitude' value=''  placeholder='Enter Your Name'
-                                             required>
-                                            <span class="error"> Latitude </span>
-
-                                            <h5> Longitude </h5>
-
-                                            <input class="darkInput" type='text' name='longitude' id='longitude' value=''  placeholder='Enter Your Name'
-                                                required>
-                                            <span class="error"> Longitude </span>
-
-
-                                          </div>
-                                          <button  name="submit" type="submit"><span>submit</span></button>
-
-
-                                          </form>
-                                        </div>
-
-
-
-
-                                        <ul class="pager wizard d-flex justify-content-end buttons ">
-                                            <li class="previous first" style="display:none;"><button class="nextprev">
-                                                    <span>First</span>
-                                                </button></li>
-                                            <li class="previous"><button class="nextprev">
-                                                    <span>PREVIOUS</span>
-                                                </button></li>
-                                            <li class="next last" style="display:none;"><button class="nextprev">
-                                                    <span>LAST</span>
-                                                </button></li>
-                                            <li class="next"><button class="nextprev">
-                                                    <span>Next</span>
-                                                </button></li>
-                                        </ul>
-                                    </div>
-
+                      </div>
+                      <div id="bar" class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                              aria-valuemax="100" style="width: 0%;"></div>
+                      </div>
+                      <div class="tab-content">
+                        <div class="tab-pane" id="tab1"> 
+                          <form action="" method="POST" enctype="multipart/form-data">                                           
+                            <div class="question">
+                              <h5> 1. Type Your Email </h5>
+                              <input class="darkInput" type='text' name='email'    placeholder='Enter Your Email'
+                               >
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tab2">
+                            <div class="question">
+                                <h5> 2. Where is this street light located? </h5>
+                                <div class="choice d-flex   flex-column  ">
+                                    <label class="rc mr30">Highway
+                                        <input type="radio" value="highway" name="where_is_this_street_light_located">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="rc mr30">Road
+                                        <input type="radio" value="road" name="where_is_this_street_light_located">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="rc mr30">Alley
+                                        <input type="radio" value="alley" name="where_is_this_street_light_located">
+                                        <span class="checkmark"></span>
+                                    </label>
                                 </div>
-
-
                             </div>
+                          </div>
+                          <!-- <div class="tab-pane" id="tab3">
+                              <div class="question">
+                                  <h5> 3. What is your area number? </h5>
+                                  <select name="what_is_your_area_number">
+                                      <option value="a1">Area 1</option>
+                                      <option value="a2">Area 2</option>
+                                  </select>
+                              </div>
+                          </div> -->
+                          <div class="tab-pane" id="tab4">
+                            <div class="question">
+                                <h5> 3. Type of Street Light </h5>
+                                <div class="choice   morechoice d-flex flex-column">
+                                    <label class="rc mr30 rm1">Electric
+                                        <input type="radio" value="electric" name="type_of_street_light">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="rc mr30 rm1">Solar
+                                        <input type="radio" value="solar" name="type_of_street_light">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                          </div>
 
+                          <div class="tab-pane" id="tab5">
+                            <div class="question">
+                                <h5> 5. Type of street light poles </h5>
+                                <div class="choice   morechoice d-flex flex-column">
+                                    <label class="rc mr30 rm">Wood
+                                        <input type="radio" value="wood" name="type_of_street_light_poles">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="rc mr30 rm">Concrete
+                                        <input type="radio" value="concrete" name="type_of_street_light_poles">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="rc mr30">Other
+                                        <input type="radio" id="others" name="other">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label id="otherinput">
+                                      <input class="darkInput mt15 inputmore" type='text' name='type_of_street_light_poles_other' id='name'
+                                          placeholder='Enter Your Name'>
+                                    </label>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tab6">
+                            <div class="question">
+                                <h5> 6. What is status of  street light</h5>
+                                <div class="choice   morechoice d-flex flex-column">
+                                    <label class="rc mr30 rm">Functional
+                                        <input type="radio" value="functional" name="what_is_the_status_of_street_light">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="rc mr30 rm">Non functional
+                                        <input type="radio" value="non functional" name="what_is_the_status_of_street_light">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                          </div>
 
-
-
+                          <div class="tab-pane" id="tab7">
+                            <div class="question">
+                                <h5> 7. Damage Detail of the street light</h5>
+                                <!-- <div class="choice   morechoice d-flex flex-column"> -->
+                                    <!-- <label class="rc mr30 rm">Solar powered -->
+                                        <!-- <input type="radio" name="radio"> -->
+                                        <textarea class="darkInput" name="damage_details_of_the_street_light" rowsize="5"></textarea>
+                                        <!-- <span class="checkmark"></span> -->
+                                    <!-- </label> -->
+                                <!-- </div> -->
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tab8">
+                            <div class="question">
+                              <h5>Select image to upload:</h5>
+                              <input type="file" name="photo" id="fileToUpload">
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tab9">
+                            <div class="question">
+                              <h5> Latitude </h5>
+                              <input class="darkInput" type='text' name='latitude' id='latitude' value=''  placeholder='Enter Your Name'
+                               required>
+                              <span class="error"> Latitude </span>
+                              <h5> Longitude </h5>
+                              <input class="darkInput" type='text' name='longitude' id='longitude' value=''  placeholder='Enter Your Name'
+                                  required>
+                              <span class="error"> Longitude </span>
+                            </div>
+                            <button  name="submit" type="submit"><span>submit</span></button>
+                          </form>
                         </div>
-
+                        <ul class="pager wizard d-flex justify-content-end buttons ">
+                            <li class="previous first" style="display:none;"><button class="nextprev">
+                                <span>First</span>
+                              </button>
+                            </li>
+                            <li class="previous"><button class="nextprev">
+                              <span>PREVIOUS</span>
+                              </button>
+                            </li>
+                            <li class="next last" style="display:none;"><button class="nextprev">
+                              <span>LAST</span>
+                              </button>
+                            </li>
+                            <li class="next"><button class="nextprev">
+                              <span>Next</span>
+                              </button>
+                            </li>
+                        </ul>
+                      </div>
                     </div>
+                  </div>
                 </div>
-
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
 
     <div class="ipopholder">
         <div class="olay">
             <div class="initialPopover">
-
-
                 <h2 class="inpop">Welcome to Kathmandu valley utility mapping initiative</h2>
                 <p>As a part of this initiative we are at first mapping the <span class="coloredtext">street lights</span>
-                    along
-                    with condition through crowd
-                    mapping</p>
-
-
+                    along with condition through crowdmapping
+                  </p>
                 <button class="maptopBtn ipbtn" type="button">
-
-                    <span> GET STARTED</span>
-                    <i class="fa fa-arrow-right">
-
-                    </i>
-
-
+                  <span> GET STARTED</span>
+                  <i class="fa fa-arrow-right"></i>
                 </button>
-
             </div>
         </div>
     </div>
 
-
+    <!-- about section start -->
     <section class="detail  about-section" id="aboutSection">
         <div class="container-fluid">
             <div class="row">
@@ -518,22 +454,13 @@
                     <h2> About</h2>
                     <p align="justify">With an aim to assist in planned urban development by collection and use of open urban geospatial data, this platform helps in mapping one of the basic urban utilities: Street Lights. Lights ON is a technical tools that allows public, voluntary groups and organizations to collect data on where street lights are and what their conditions are. The crowdsourced data collected using a mobile application is fed into this open web platform showing locations of the street lights. The target is to use this portal for real time information on status of street lights, get a visual sense of how much of the area of the city is lighted and provide baseline data to authorities for better urban development.</p>
                     <p>Lights On is a joint initiative of Youth Innovation Lab and NAXA with support from Asia Foundation and Data For Development (D4D) to engage youth in digital advocacy campaign.</p>
-
-
-
-
                 </div>
-
             </div>
         </div>
-
-
     </section>
-
-
-
-
-
+    <!-- about section end -->
+    
+    <!-- jquery libaray -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
@@ -547,7 +474,6 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="<?php echo base_url()?>/assets/frontend/js/intro.min.js"></script>
-    <script src="<?php echo base_url()?>/assets/frontend/js/jquery.nicescroll.min.js"></script>
     <script src="<?php echo base_url()?>/assets/frontend/js/leaflet.ajax.min.js"></script>
     <script src="<?php echo base_url()?>/assets/frontend/js/leaflet-bing-layer.js"></script>
 
@@ -1154,12 +1080,6 @@
 
           });
 
-            $(".aboutBtn ").click(function () {
-
-                $('html, body').animate({
-                    scrollTop: $(".about-section").offset().top
-                }, 1000);
-            });
             $('#rootwizard').bootstrapWizard({
 
                 onNext: function (tab, navigation, index) {
@@ -1275,10 +1195,6 @@
 
 
         });
-
-
-
-
     </script>
 
 </body>
