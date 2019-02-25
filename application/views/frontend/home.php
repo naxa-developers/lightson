@@ -667,7 +667,7 @@
           var popCont='';
           popCont+='<div class="mappopup">';
           popCont+='<img src="'+feature.properties.photo_thumb+'" alt="map" style="padding:2px; border:1px solid #efefef;max-width:100%; height:auto;">';
-          popCont+='<ul style="list-style: none; min-width: 200px; background:#fff; box-shadow: 0px 0px 17px 0px rgba(0, 0, 0, 0.19); padding:5px; font-size: 0.775rem;">'
+          popCont+='<ul style="list-style: none;  font-size: 0.775rem;">'
           popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Email: </label>'+feature.properties.email+'</li>';
           popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Where Is The Street Light Located : </label>'+feature.properties.where_is_this_street_light_located+'</li>';
           popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Type of street lightt :</label>'+feature.properties.type_of_street_light+'</li>';
@@ -983,7 +983,7 @@
         var marker = L.marker([27.710623, 85.327163], {
             draggable: true
         }).addTo(mymap1);
-        marker.bindPopup('<b><p class="center">Drag The Marker To Choose Light</p></b>').openPopup();
+        marker.bindPopup('<p class="center layerpopup" style="width:100%">Drag The Marker To Choose Light</p>').openPopup();
         marker.on('dragend', function(e) {
 
 
@@ -1269,6 +1269,9 @@
         $('.toggle-filter .switch').on("change", function () {
             $('.progress-report').show('slow');
           });
+        
+            $('p.layerpopup').parent('.leaflet-popup-content').css('width','100%');
+          
 
 
         });
