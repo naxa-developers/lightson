@@ -647,7 +647,7 @@
 
             }
             icons = L.icon({
-              iconSize: [40, 45],
+              iconSize: [7, 8],
               iconAnchor: [13, 27],
               popupAnchor:  [2, -24],
               iconUrl: icon
@@ -1269,9 +1269,9 @@
         $('.toggle-filter .switch').on("change", function () {
             $('.progress-report').show('slow');
           });
-        
+
             $('p.layerpopup').parent('.leaflet-popup-content').css('width','100%');
-          
+
 
 
         });

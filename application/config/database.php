@@ -79,11 +79,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
-<<<<<<< HEAD
 	'database' => 'all_data',
-=======
-	'database' => 'light',
->>>>>>> b564ee79cf519236f6714a1547f26ec8d8d65754
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
