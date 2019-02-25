@@ -666,7 +666,7 @@
 
           var popCont='';
           popCont+='<div class="mappopup">';
-          popCont+='<img src="'+feature.properties.photo_thumb+'" alt="map" style="padding:2px; border:1px solid #efefef;max-width:100%; height:auto;">';
+          popCont+='<img src="'+feature.properties.photo_thumb+'" alt="map" style="padding:2px; border:1px solid #efefef;max-width:200px; height:auto;">';
           popCont+='<ul style="list-style: none;  font-size: 0.775rem;">'
           popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Email: </label>'+feature.properties.email+'</li>';
           popCont+='<li style="display: block; "><label style="margin-right: 5px; font-weight: 600;">Where Is The Street Light Located : </label>'+feature.properties.where_is_this_street_light_located+'</li>';

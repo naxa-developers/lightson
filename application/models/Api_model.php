@@ -24,7 +24,7 @@ public function insert($data){
     $field_name                     ='photo';
     $config['upload_path']          = './uploads/';
     $config['allowed_types']        = 'gif|jpg|jpeg|png';
-    $config['max_size']             = 7000;
+    $config['max_size']             = 70000;
     $config['overwrite']            = TRUE;
     $config['file_name']           = $name;
 
