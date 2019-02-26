@@ -78,7 +78,7 @@
           </div>
         </section>
         <!-- leaftlet map end -->
-        
+
         <!-- mapside data -->
         <div class="sideData">
 
@@ -272,8 +272,8 @@
                               aria-valuemax="100" style="width: 0%;"></div>
                       </div>
                       <div class="tab-content">
-                        <div class="tab-pane" id="tab1"> 
-                          <form action="" method="POST" enctype="multipart/form-data">                                           
+                        <div class="tab-pane" id="tab1">
+                          <form action="" method="POST" enctype="multipart/form-data">
                             <div class="question">
                               <h5> 1. Enter your email address</h5>
                               <input class="darkInput" type='text' name='email'    placeholder='Email address'
@@ -459,7 +459,7 @@
         </div>
     </section>
     <!-- about section end -->
-    
+
     <!-- jquery libaray -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -553,33 +553,34 @@
         var light_map = new L.GeoJSON(geojson_layer, {
 
           pointToLayer: function(feature, latlng) {
-            if(feature.properties.type_of_street_light == "solar"){
-
-              if(feature.properties.what_is_the_status_of_street_light == "functional"){
-              var  icon='<?php echo base_url()?>/icon/sa.png';
-              }
-
-              else{
-              var  icon='<?php echo base_url()?>/icon/si.png';
-              }
-            }else{
-              if(feature.properties.what_is_the_status_of_street_light == "functional"){
-              var  icon='<?php echo base_url()?>/icon/ea.png';
-              }
-
-              else{
-              var  icon='<?php echo base_url()?>/icon/ei.png';
-              }
-
-            }
-            icons = L.icon({
-              iconSize: [7, 8],
-              iconAnchor: [13, 27],
-              popupAnchor:  [2, -24],
-              iconUrl: icon
-            });
-            //console.log(icon.options);
-            var marker = L.marker(latlng, {icon: icons});
+            // if(feature.properties.type_of_street_light == "solar"){
+            //
+            //   if(feature.properties.what_is_the_status_of_street_light == "functional"){
+            //   var  icon='<?php echo base_url()?>/icon/sa.png';
+            //   }
+            //
+            //   else{
+            //   var  icon='<?php echo base_url()?>/icon/si.png';
+            //   }
+            // }else{
+            //   if(feature.properties.what_is_the_status_of_street_light == "functional"){
+            //   var  icon='<?php echo base_url()?>/icon/ea.png';
+            //   }
+            //
+            //   else{
+            //   var  icon='<?php echo base_url()?>/icon/ei.png';
+            //   }
+            //
+            // }
+            // icons = L.icon({
+            //   iconSize: [7, 8],
+            //   iconAnchor: [13, 27],
+            //   popupAnchor:  [2, -24],
+            //   iconUrl: icon
+            // });
+            // //console.log(icon.options);
+            // var marker = L.marker(latlng, {icon: icons});
+            var marker = L.circleMarker(latlng);
             return marker;
 
           },
@@ -590,26 +591,34 @@
 
 
 
-          var popCont='';
-          popCont+='<div class="mappopup" style="max-height:300px; overflow-y:auto; max-width:400px; width:100%;">';
-          popCont+='<img src="'+feature.properties.photo_thumb+'" alt="map" style="padding:2px; border:1px solid #efefef;max-width:100%; height:auto;">';
-          popCont+='<ul style="list-style: none;  font-size: 0.775rem; padding:5px; border:1px solid #efefef;">'
-          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Email: </label>'+feature.properties.email+'</li>';
-          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Where Is The Street Light Located : </label>'+feature.properties.where_is_this_street_light_located+'</li>';
-          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Type of street lightt :</label>'+feature.properties.type_of_street_light+'</li>';
-          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">what_is_the_status_of_street_light :</label>'+feature.properties.what_is_the_status_of_street_light+'</li>';
-          popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">damage_details_of_the_street_light :</label>'+feature.properties.damage_details_of_the_street_light+'</li>';
-          popCont+='</ul></div>';
-            layer.bindPopup(popCont);
             //feature.properties.layer_name = "transit_stops";
             //add if condition
             if(feature.properties.type_of_street_light == "solar"){
               layer.addTo(solar);
               if(feature.properties.what_is_the_status_of_street_light == "functional"){
+                var  style=({
+                        fillColor: 'yellow',
+                        weight: 5,
+                        opacity: 0.5,
+                        color: 'yellow',
+                        radius: '5',
+                        fillOpacity:1
+
+                });
                 s_func_count++;
                 layer.addTo(solar_functional);
-              }
-              else{
+
+              }else{
+
+                var  style=({
+                  fillColor: 'yellow',
+                  weight: 5,
+                  opacity: 0.5,
+                  color: 'red',
+                  radius: '5',
+                  fillOpacity:0.9
+
+                });
                 s_non_func_count++;
                 layer.addTo(solar_nonfunctional);
               }
@@ -617,16 +626,50 @@
             else{
               layer.addTo(electric);
               if(feature.properties.what_is_the_status_of_street_light == "functional"){
+                var  style=({
+                        fillColor: '#c1f441',
+                        weight: 5,
+                        opacity: 0.5,
+                        color: '#669618',
+                        radius: '5',
+                        fillOpacity: 0.9
+
+                });
                 e_func_count++;
                 layer.addTo(electric_functional);
               }
               else{
+                var  style=({
+                  fillColor: '#c1f441',
+                  weight: 5,
+                  opacity: 0.5,
+                  color: '#871896',
+                  radius: '5',
+                  fillOpacity: 0.9
+
+                });
+
                 e_non_func_count++;
                 layer.addTo(electric_nonfunctional);
               }
 
             }
             //else
+            //style for circle marker
+
+            layer.setStyle(style);
+            //end
+            var popCont='';
+            popCont+='<div class="mappopup" style="max-height:300px; overflow-y:auto; max-width:400px; width:100%;">';
+            popCont+='<img src="'+feature.properties.photo_thumb+'" alt="map" style="padding:2px; border:1px solid #efefef;max-width:100%; height:auto;">';
+            popCont+='<ul style="list-style: none;  font-size: 0.775rem; padding:5px; border:1px solid #efefef;">'
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Email: </label>'+feature.properties.email+'</li>';
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Where Is The Street Light Located : </label>'+feature.properties.where_is_this_street_light_located+'</li>';
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Type of street lightt :</label>'+feature.properties.type_of_street_light+'</li>';
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">what_is_the_status_of_street_light :</label>'+feature.properties.what_is_the_status_of_street_light+'</li>';
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">damage_details_of_the_street_light :</label>'+feature.properties.damage_details_of_the_street_light+'</li>';
+            popCont+='</ul></div>';
+              layer.bindPopup('popCont');
 
           }
         });//.addTo(mymap);
@@ -1097,28 +1140,9 @@
                     //
                     //     }
                     // }
+
+
                     if (index == 3) {
-                      console.log('3');
-                        $('.rm1').click(function () {
-                          console.log('aaaa');
-                            $(".type").removeClass("showinput");
-
-                        })
-
-                        // if ($('#others').click(function () {
-                        //         $(".inputmore").addClass("showinput");
-                        //
-                        //     }));
-
-                        if ($('#others1').click(function () {
-                          console.log('aaaabbb');
-                                $(".inputmore1").addClass("showinput");
-
-                            }));
-
-                    }
-
-                    if (index == 4) {
                       console.log('4');
 
                         $('.morechoice .rm').click(function () {
@@ -1190,7 +1214,7 @@
             $('.progress-report').show('slow');
           });
 
-            
+
             $('p.layerpopup').parent('.leaflet-popup-content').css('width','100%');
 
 
