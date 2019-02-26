@@ -960,29 +960,29 @@ li{
     position: absolute;
     left:0;
     top:8px;
-    
+
 }
-.filter ul li .slfn p:before{
+.filter ul li .elfn p:before{
     background-color: #FFFF00;
     -webkit-animation: slfnpulse 1.2s infinite;
     -moz-animation: slfnpulse 1.2s infinite;
     animation: slfnpulse 1.2s infinite;
 }
-.filter ul li .slnfn p:before{
+.filter ul li .elnfn p:before{
     background-color: #FFFF00;
     -webkit-animation: slnfnpulse 1.5s infinite;
     -moz-animation: slnfnpulse 1.5s infinite;
     animation: slnfnpulse 1.5s infinite;
     border:1.5px solid red;
 }
-.filter ul li .elfn p:before{
+.filter ul li .slfn p:before{
     background-color: #c1f441;
     -webkit-animation: elfnpulse 1.8s infinite;
     -moz-animation: elfnpulse 1.8s infinite;
     animation: elfnpulse 1.8s infinite;
     border:1.5px solid #669618;
 }
-.filter ul li .elnfn p:before{
+.filter ul li .slnfn p:before{
     background-color: #c1f441;
     -webkit-animation: elnfnpulse 2s infinite;
     -moz-animation: elnfnpulse 2s infinite;
@@ -1098,7 +1098,7 @@ li{
     padding: 10px;
     float:left;
     width:100%;
-    
+
 }
 .progress-report h4{
     font-size: 0.775rem;
@@ -1364,7 +1364,7 @@ min-width: 150px !important;
 
     }
     .modal-dialog {
-         max-width: 100%; 
+         max-width: 100%;
     }
     #iframeMap{
         height: 300px;
@@ -1384,7 +1384,7 @@ min-width: 150px !important;
         position: unset;
         top: unset;
         right: unset;
-        bottom: unset;        
+        bottom: unset;
         clear: both;
         background: #000;
     }

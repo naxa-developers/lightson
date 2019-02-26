@@ -480,12 +480,12 @@
     <script>
         var geojson='<?php echo $light_data ?>';
         geojson_layer = JSON.parse(geojson);
-        
+
     </script>
     <script>
 
     $(document).ready(function(){
-        
+
         //console.log(geojson_layer);
 
         mymap = L.map('mapid').setView([27.608421548604188, 85.3887634444982], 11);
@@ -540,9 +540,9 @@
             maxZoom: 20,
             attribution: '&copy; Openstreetmap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         });
-        
-        
-        
+
+
+
         // loading layers Ward_Boundary
         kathmandu = new L.geoJson.ajax("./geojson/Kathmandu.geojson", {
                     onEachFeature: function (feature, layer) {
@@ -580,7 +580,7 @@
 
                     });
                     console.log("Ward Layer Added");
-                    
+
                     //map.fitBounds(Ward_Boundary.getBounds(), {padding:[-50,-50]});
                 });
                 kathmandu.addTo(mymap);
@@ -667,12 +667,12 @@
                 });
                 bhaktapur.addTo(mymap);
         //end
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         function createProgressBar(s_func_count_p,s_non_func_count_p,e_func_count_p,e_non_func_count_p){
           //console.log(s_func_count_p);
           $('#p_s_func').attr('aria-valuenow',s_func_count_p);
@@ -690,11 +690,11 @@
             $(this).parent().find('.progress-value').html(" " + now);
         });
         }
-        
+
         //end
 
-        
-        
+
+
 
         //console.log(geojson_layer);
         var solar_functional=L.layerGroup();
@@ -707,9 +707,9 @@
         var s_non_func_count=0;
         var e_func_count=0;
         var e_non_func_count=0;
-        
-        
-    setTimeout(function(){ 
+
+
+    setTimeout(function(){
         var light_map = new L.GeoJSON(geojson_layer, {
 
           pointToLayer: function(feature, latlng) {
@@ -751,9 +751,9 @@
 
 
 
-            
 
-            
+
+
             layer.on("click",function(){
                 console.log("layer clicked");
             });
@@ -769,8 +769,8 @@
             popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">damage_details_of_the_street_light :</label>'+feature.properties.damage_details_of_the_street_light+'</li>';
             popCont+='</ul></div>';
               layer.bindPopup(popCont);
-              
-              
+
+
             //feature.properties.layer_name = "transit_stops";
             //add if condition
             if(feature.properties.type_of_street_light == "solar"){
@@ -778,12 +778,12 @@
               var style;
               if(feature.properties.what_is_the_status_of_street_light == "functional"){
                 style=({
-                        fillColor: 'yellow',
+                        fillColor: '#c1f441',
                         weight: 5,
                         opacity: 0.5,
-                        color: 'yellow',
+                        color: '#669618',
                         radius: '5',
-                        fillOpacity:1
+                        fillOpacity: 0.9
 
                 });
                 s_func_count++;
@@ -792,12 +792,12 @@
               }else{
 
                 style=({
-                  fillColor: 'yellow',
+                  fillColor: '#c1f441',
                   weight: 5,
                   opacity: 0.5,
-                  color: 'red',
+                  color: '#871896',
                   radius: '5',
-                  fillOpacity:0.9
+                  fillOpacity: 0.9
 
                 });
                 s_non_func_count++;
@@ -816,17 +816,29 @@
                         fillOpacity: 0.9
 
                 });
+
+                style=({
+                        fillColor: 'yellow',
+                        weight: 5,
+                        opacity: 0.5,
+                        color: 'yellow',
+                        radius: '5',
+                        fillOpacity:1
+
+                });
                 e_func_count++;
                 layer.addTo(electric_functional);
               }
               else{
+
+
                 style=({
-                  fillColor: '#c1f441',
+                  fillColor: 'yellow',
                   weight: 5,
                   opacity: 0.5,
-                  color: '#871896',
+                  color: 'red',
                   radius: '5',
-                  fillOpacity: 0.9
+                  fillOpacity:0.9
 
                 });
 
@@ -847,20 +859,20 @@
         solar_nonfunctional.addTo(mymap);
         electric_functional.addTo(mymap);
         electric_nonfunctional.addTo(mymap);
-        
-        
+
+
             // solar_functional.bringToFront();
             // solar_nonfunctional.bringToFront();
             // electric_functional.bringToFront();
             // electric_nonfunctional.bringToFront();
-            
-            
-            
+
+
+
         createProgressBar(s_func_count,s_non_func_count,e_func_count,e_non_func_count);
-            
+
         }, 2000);
 
-        
+
 
         $('.switch-input').on('change',function(){
         //  console.log('clicked');
@@ -891,7 +903,7 @@
 
         //adding value to pregress bar
       //  var s_func_count;
-        
+
 
         $(".CheckBox").on("click",function(e){
           var value = $(this).val();
@@ -985,12 +997,12 @@
           "Bing Aerial": bing1
         };
         bing1.addTo(mymap1);
-        
-        
+
+
 
         layerswitcher1 = L.control.layers(baseLayers1,null,{collapsed:true}).addTo(mymap1);
 
-        
+
 
 
 
@@ -1140,25 +1152,25 @@
             $("#addlight").click(function () {
 
               $(".sideData-wrap").hide();
-              
+
               //set the same view of map as the main map
               var mymapcenter = mymap.getCenter();
               var mymapzoom =  mymap.getZoom();
                 mymap1.setView(mymapcenter, mymapzoom);
-                
+
                 //add marker to the center of map
                 var marker = L.marker(mymapcenter, {
                     draggable: true
                 }).addTo(mymap1);
                 marker.bindPopup('<p class="center layerpopup" style="width:100%">Drag The Marker To Choose Light</p>').openPopup();
                 marker.on('dragend', function(e) {
-        
-        
+
+
                     document.getElementById('latitude').value = marker.getLatLng().lat;
                     document.getElementById('longitude').value = marker.getLatLng().lng;
-        
+
                 });
-                
+
             })
         });
     </script>
