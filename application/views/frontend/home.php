@@ -180,7 +180,7 @@
                     <div class="toggle-subfilter">
                       <h5>Solar Light </h5>
                       <!-- filter -->
-                      <div class="toggle-filter">
+                      <div class="toggle-filter slfn">
                         <p>functional</p>
                         <div class="switch">
                             <input type="checkbox" value = "solar_functional" class="CheckBox" id="function-btn" checked>
@@ -189,7 +189,7 @@
                       </div>
 
                       <!-- filter -->
-                      <div class="toggle-filter">
+                      <div class="toggle-filter slnfn">
                         <p>Non-functional</p>
                         <div class="switch">
                             <input type="checkbox" value="solar_nonfunctional" class="CheckBox" id="nonfunction-btn" checked>
@@ -204,7 +204,7 @@
                     <div class="toggle-subfilter">
                       <h5>Electric Light</h5>
                       <!--filter -->
-                      <div class="toggle-filter">
+                      <div class="toggle-filter elfn">
                         <p>functional</p>
                         <div class="switch">
                             <input type="checkbox" value = "electric_functional" class="CheckBox" id="electric-btn" checked>
@@ -213,7 +213,7 @@
                       </div>
 
                       <!--filter -->
-                      <div class="toggle-filter">
+                      <div class="toggle-filter elnfn">
                         <p>Non-functional</p>
                         <div class="switch">
                             <input type="checkbox" value="electric_nonfunctional" class="CheckBox" id="nonelectric-btn" checked>
