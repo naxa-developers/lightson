@@ -477,12 +477,15 @@
     <script src="<?php echo base_url()?>/assets/frontend/js/leaflet.ajax.min.js"></script>
     <script src="<?php echo base_url()?>/assets/frontend/js/leaflet-bing-layer.js"></script>
 
-
+    <script>
+        var geojson='<?php echo $light_data ?>';
+        geojson_layer = JSON.parse(geojson);
+        
+    </script>
     <script>
 
     $(document).ready(function(){
-        var geojson='<?php echo $light_data ?>';
-        geojson_layer = JSON.parse(geojson);
+        
         //console.log(geojson_layer);
 
         mymap = L.map('mapid').setView([27.608421548604188, 85.3887634444982], 11);
@@ -537,149 +540,9 @@
             maxZoom: 20,
             attribution: '&copy; Openstreetmap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         });
-
-        //console.log(geojson_layer);
-        var solar_functional=L.featureGroup();
-        var electric_functional=L.featureGroup();
-        var solar_nonfunctional=L.featureGroup();
-        var electric_nonfunctional=L.featureGroup();
-        var electric = L.featureGroup();
-        var solar=L.featureGroup();
-        var s_func_count=0;
-        var s_non_func_count=0;
-        var e_func_count=0;
-        var e_non_func_count=0;
-
-        var light_map = new L.GeoJSON(geojson_layer, {
-
-          pointToLayer: function(feature, latlng) {
-            // if(feature.properties.type_of_street_light == "solar"){
-            //
-            //   if(feature.properties.what_is_the_status_of_street_light == "functional"){
-            //   var  icon='<?php echo base_url()?>/icon/sa.png';
-            //   }
-            //
-            //   else{
-            //   var  icon='<?php echo base_url()?>/icon/si.png';
-            //   }
-            // }else{
-            //   if(feature.properties.what_is_the_status_of_street_light == "functional"){
-            //   var  icon='<?php echo base_url()?>/icon/ea.png';
-            //   }
-            //
-            //   else{
-            //   var  icon='<?php echo base_url()?>/icon/ei.png';
-            //   }
-            //
-            // }
-            // icons = L.icon({
-            //   iconSize: [7, 8],
-            //   iconAnchor: [13, 27],
-            //   popupAnchor:  [2, -24],
-            //   iconUrl: icon
-            // });
-            // //console.log(icon.options);
-            // var marker = L.marker(latlng, {icon: icons});
-            var marker = L.circleMarker(latlng);
-            return marker;
-
-          },
-
-          onEachFeature: function(feature, layer) {
-        //  console.log(feature.properties);
-
-
-
-
-            //feature.properties.layer_name = "transit_stops";
-            //add if condition
-            if(feature.properties.type_of_street_light == "solar"){
-              layer.addTo(solar);
-              if(feature.properties.what_is_the_status_of_street_light == "functional"){
-                var  style=({
-                        fillColor: 'yellow',
-                        weight: 5,
-                        opacity: 0.5,
-                        color: 'yellow',
-                        radius: '5',
-                        fillOpacity:1
-
-                });
-                s_func_count++;
-                layer.addTo(solar_functional);
-
-              }else{
-
-                var  style=({
-                  fillColor: 'yellow',
-                  weight: 5,
-                  opacity: 0.5,
-                  color: 'red',
-                  radius: '5',
-                  fillOpacity:0.9
-
-                });
-                s_non_func_count++;
-                layer.addTo(solar_nonfunctional);
-              }
-            }
-            else{
-              layer.addTo(electric);
-              if(feature.properties.what_is_the_status_of_street_light == "functional"){
-                var  style=({
-                        fillColor: '#c1f441',
-                        weight: 5,
-                        opacity: 0.5,
-                        color: '#669618',
-                        radius: '5',
-                        fillOpacity: 0.9
-
-                });
-                e_func_count++;
-                layer.addTo(electric_functional);
-              }
-              else{
-                var  style=({
-                  fillColor: '#c1f441',
-                  weight: 5,
-                  opacity: 0.5,
-                  color: '#871896',
-                  radius: '5',
-                  fillOpacity: 0.9
-
-                });
-
-                e_non_func_count++;
-                layer.addTo(electric_nonfunctional);
-              }
-
-            }
-            //else
-            //style for circle marker
-
-            layer.setStyle(style);
-            //end
-            var popCont='';
-            popCont+='<div class="mappopup" style="max-height:300px; overflow-y:auto; max-width:400px; width:100%;">';
-            popCont+='<img src="'+feature.properties.photo_thumb+'" alt="map" style="padding:2px; border:1px solid #efefef;max-width:100%; height:auto;">';
-            popCont+='<ul style="list-style: none;  font-size: 0.775rem; padding:5px; border:1px solid #efefef;">'
-            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Email: </label>'+feature.properties.email+'</li>';
-            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Where Is The Street Light Located : </label>'+feature.properties.where_is_this_street_light_located+'</li>';
-            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Type of street lightt :</label>'+feature.properties.type_of_street_light+'</li>';
-            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">what_is_the_status_of_street_light :</label>'+feature.properties.what_is_the_status_of_street_light+'</li>';
-            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">damage_details_of_the_street_light :</label>'+feature.properties.damage_details_of_the_street_light+'</li>';
-            popCont+='</ul></div>';
-              layer.bindPopup('popCont');
-
-          }
-        });//.addTo(mymap);
-
-
-        solar_functional.addTo(mymap);
-        solar_nonfunctional.addTo(mymap);
-        electric_functional.addTo(mymap);
-        electric_nonfunctional.addTo(mymap);
-
+        
+        
+        
         // loading layers Ward_Boundary
         kathmandu = new L.geoJson.ajax("./geojson/Kathmandu.geojson", {
                     onEachFeature: function (feature, layer) {
@@ -717,6 +580,7 @@
 
                     });
                     console.log("Ward Layer Added");
+                    
                     //map.fitBounds(Ward_Boundary.getBounds(), {padding:[-50,-50]});
                 });
                 kathmandu.addTo(mymap);
@@ -803,6 +667,200 @@
                 });
                 bhaktapur.addTo(mymap);
         //end
+        
+        
+        
+        
+        
+        
+        function createProgressBar(s_func_count_p,s_non_func_count_p,e_func_count_p,e_non_func_count_p){
+          //console.log(s_func_count_p);
+          $('#p_s_func').attr('aria-valuenow',s_func_count_p);
+          $('#p_s_nfunc').attr('aria-valuenow',s_non_func_count_p);
+          $('#p_e_func').attr('aria-valuenow',e_func_count_p);
+          $('#p_e_nfunc').attr('aria-valuenow',e_non_func_count_p);
+
+          $(".progress-bar").each(function () {
+            var now=$(this).attr('aria-valuenow')
+            var max=$(this).attr('aria-valuemax')
+            var $percent = (now / max) * 100;
+            each_bar_width = $(this).attr('aria-valuenow');
+            $(this).width(Math.round($percent) + '%');
+            $(this).find('.popOver').html(Math.round($percent) + '%');
+            $(this).parent().find('.progress-value').html(" " + now);
+        });
+        }
+        
+        //end
+
+        
+        
+
+        //console.log(geojson_layer);
+        var solar_functional=L.layerGroup();
+        var electric_functional=L.layerGroup();
+        var solar_nonfunctional=L.layerGroup();
+        var electric_nonfunctional=L.layerGroup();
+        var electricgroup = L.layerGroup();
+        var solargroup=L.layerGroup();
+        var s_func_count=0;
+        var s_non_func_count=0;
+        var e_func_count=0;
+        var e_non_func_count=0;
+        
+        
+    setTimeout(function(){ 
+        var light_map = new L.GeoJSON(geojson_layer, {
+
+          pointToLayer: function(feature, latlng) {
+            // if(feature.properties.type_of_street_light == "solar"){
+            //
+            //   if(feature.properties.what_is_the_status_of_street_light == "functional"){
+            //   var  icon='<?php echo base_url()?>/icon/sa.png';
+            //   }
+            //
+            //   else{
+            //   var  icon='<?php echo base_url()?>/icon/si.png';
+            //   }
+            // }else{
+            //   if(feature.properties.what_is_the_status_of_street_light == "functional"){
+            //   var  icon='<?php echo base_url()?>/icon/ea.png';
+            //   }
+            //
+            //   else{
+            //   var  icon='<?php echo base_url()?>/icon/ei.png';
+            //   }
+            //
+            // }
+            // icons = L.icon({
+            //   iconSize: [7, 8],
+            //   iconAnchor: [13, 27],
+            //   popupAnchor:  [2, -24],
+            //   iconUrl: icon
+            // });
+            // //console.log(icon.options);
+            // var marker = L.marker(latlng, {icon: icons});
+            var marker = L.circleMarker(latlng);
+            return marker;
+
+          },
+
+          onEachFeature: function(feature, layer) {
+        //  console.log(feature.properties);
+
+
+
+
+            
+
+            
+            layer.on("click",function(){
+                console.log("layer clicked");
+            });
+            //end
+            var popCont='';
+            popCont+='<div class="mappopup" style="max-height:300px; overflow-y:auto; max-width:400px; width:100%;">';
+            popCont+='<img src="'+feature.properties.photo_thumb+'" alt="map" style="padding:2px; border:1px solid #efefef;max-width:100%; height:auto;">';
+            popCont+='<ul style="list-style: none;  font-size: 0.775rem; padding:5px; border:1px solid #efefef;">'
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Email: </label>'+feature.properties.email+'</li>';
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Where Is The Street Light Located : </label>'+feature.properties.where_is_this_street_light_located+'</li>';
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">Type of street lightt :</label>'+feature.properties.type_of_street_light+'</li>';
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">what_is_the_status_of_street_light :</label>'+feature.properties.what_is_the_status_of_street_light+'</li>';
+            popCont+='<li style="display: block; border-bottom:1px solid #efefef; padding: 5px 0;"><label style="margin-right: 5px; font-weight: 600;">damage_details_of_the_street_light :</label>'+feature.properties.damage_details_of_the_street_light+'</li>';
+            popCont+='</ul></div>';
+              layer.bindPopup(popCont);
+              
+              
+            //feature.properties.layer_name = "transit_stops";
+            //add if condition
+            if(feature.properties.type_of_street_light == "solar"){
+              layer.addTo(solargroup);
+              var style;
+              if(feature.properties.what_is_the_status_of_street_light == "functional"){
+                style=({
+                        fillColor: 'yellow',
+                        weight: 5,
+                        opacity: 0.5,
+                        color: 'yellow',
+                        radius: '5',
+                        fillOpacity:1
+
+                });
+                s_func_count++;
+                layer.addTo(solar_functional);
+
+              }else{
+
+                style=({
+                  fillColor: 'yellow',
+                  weight: 5,
+                  opacity: 0.5,
+                  color: 'red',
+                  radius: '5',
+                  fillOpacity:0.9
+
+                });
+                s_non_func_count++;
+                layer.addTo(solar_nonfunctional);
+              }
+            }
+            else{
+              layer.addTo(electricgroup);
+              if(feature.properties.what_is_the_status_of_street_light == "functional"){
+                style=({
+                        fillColor: '#c1f441',
+                        weight: 5,
+                        opacity: 0.5,
+                        color: '#669618',
+                        radius: '5',
+                        fillOpacity: 0.9
+
+                });
+                e_func_count++;
+                layer.addTo(electric_functional);
+              }
+              else{
+                style=({
+                  fillColor: '#c1f441',
+                  weight: 5,
+                  opacity: 0.5,
+                  color: '#871896',
+                  radius: '5',
+                  fillOpacity: 0.9
+
+                });
+
+                e_non_func_count++;
+                layer.addTo(electric_nonfunctional);
+              }
+
+            }
+            //else
+            //style for circle marker
+            layer.setStyle(style);
+
+          }
+        });//.addTo(mymap);
+
+
+        solar_functional.addTo(mymap);
+        solar_nonfunctional.addTo(mymap);
+        electric_functional.addTo(mymap);
+        electric_nonfunctional.addTo(mymap);
+        
+        
+            // solar_functional.bringToFront();
+            // solar_nonfunctional.bringToFront();
+            // electric_functional.bringToFront();
+            // electric_nonfunctional.bringToFront();
+            
+            
+            
+        createProgressBar(s_func_count,s_non_func_count,e_func_count,e_non_func_count);
+            
+        }, 2000);
+
+        
 
         $('.switch-input').on('change',function(){
         //  console.log('clicked');
@@ -833,26 +891,7 @@
 
         //adding value to pregress bar
       //  var s_func_count;
-        function createProgressBar(s_func_count_p,s_non_func_count_p,e_func_count_p,e_non_func_count_p){
-          //console.log(s_func_count_p);
-          $('#p_s_func').attr('aria-valuenow',s_func_count_p);
-          $('#p_s_nfunc').attr('aria-valuenow',s_non_func_count_p);
-          $('#p_e_func').attr('aria-valuenow',e_func_count_p);
-          $('#p_e_nfunc').attr('aria-valuenow',e_non_func_count_p);
-
-          $(".progress-bar").each(function () {
-            var now=$(this).attr('aria-valuenow')
-            var max=$(this).attr('aria-valuemax')
-            var $percent = (now / max) * 100;
-            each_bar_width = $(this).attr('aria-valuenow');
-            $(this).width(Math.round($percent) + '%');
-            $(this).find('.popOver').html(Math.round($percent) + '%');
-            $(this).parent().find('.progress-value').html(" " + now);
-        });
-        }
-        createProgressBar(s_func_count,s_non_func_count,e_func_count,e_non_func_count);
-        //end
-
+        
 
         $(".CheckBox").on("click",function(e){
           var value = $(this).val();
@@ -911,7 +950,7 @@
 
 
 
-    var mymap1 = L.map('iframeMap').setView([27.7172, 85.3240], 13);
+    mymap1 = L.map('iframeMap').setView([27.7172, 85.3240], 13);
     var CartoDB_DarkMatter1 = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
@@ -946,20 +985,12 @@
           "Bing Aerial": bing1
         };
         bing1.addTo(mymap1);
+        
+        
 
         layerswitcher1 = L.control.layers(baseLayers1,null,{collapsed:true}).addTo(mymap1);
 
-        var marker = L.marker([27.710623, 85.327163], {
-            draggable: true
-        }).addTo(mymap1);
-        marker.bindPopup('<p class="center layerpopup" style="width:100%">Drag The Marker To Choose Light</p>').openPopup();
-        marker.on('dragend', function(e) {
-
-
-            document.getElementById('latitude').value = marker.getLatLng().lat;
-            document.getElementById('longitude').value = marker.getLatLng().lng;
-
-        });
+        
 
 
 
@@ -1109,6 +1140,25 @@
             $("#addlight").click(function () {
 
               $(".sideData-wrap").hide();
+              
+              //set the same view of map as the main map
+              var mymapcenter = mymap.getCenter();
+              var mymapzoom =  mymap.getZoom();
+                mymap1.setView(mymapcenter, mymapzoom);
+                
+                //add marker to the center of map
+                var marker = L.marker(mymapcenter, {
+                    draggable: true
+                }).addTo(mymap1);
+                marker.bindPopup('<p class="center layerpopup" style="width:100%">Drag The Marker To Choose Light</p>').openPopup();
+                marker.on('dragend', function(e) {
+        
+        
+                    document.getElementById('latitude').value = marker.getLatLng().lat;
+                    document.getElementById('longitude').value = marker.getLatLng().lng;
+        
+                });
+                
             })
         });
     </script>
